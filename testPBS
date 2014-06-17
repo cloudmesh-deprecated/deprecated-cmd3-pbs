@@ -2,12 +2,19 @@
 # 
 #
 #PBS -k oe
+#PBS -l node=8:ppn=8,walltime=24:00:00
 #PBS -M lsaggu@indiana.edu
 #PBS -m abe
 #PBS -N testPBS
 #PBS -j oe
 
-echo " "
+# './process &' runs process file in parallel .... I think?
+
+#Need to access files in twister and change ip address.
+
+
+sleep 2
+
 echo " "
 echo "Success"
 echo " "
