@@ -1,0 +1,13 @@
+# This is a test PBS script to be run using python program using sh library on FutureGrid cluster
+# 
+#
+#PBS -k oe
+#PBS -M lsaggu@indiana.edu
+#PBS -m abe
+#PBS -N testPBS
+#PBS -j oe
+
+echo " "
+echo " "
+echo "Success"
+echo " "
