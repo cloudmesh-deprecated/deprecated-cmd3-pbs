@@ -2,7 +2,7 @@
 # 
 #
 #PBS -k oe
-#PBS -l node=8:ppn=8,walltime=24:00:00
+##PBS -l node=8:ppn=8,walltime=24:00:00
 #PBS -M lsaggu@indiana.edu
 #PBS -m abe
 #PBS -N testPBS
@@ -10,11 +10,20 @@
 
 # './process &' runs process file in parallel .... I think?
 
-#Need to access files in twister and change ip address.
+#Need to access files in twister and change ip address. Do I need to add root node??? url in TWISTER_HOME/bin/amq.properties is root node.... I think...
 
+x=8
+	
+test(y=$x)
+{
+	echo $y
+}
 
-sleep 2
+# USE "&" to start another process in parallel
 
+test()
 echo " "
 echo "Success"
 echo " "
+
+# files can be executed simply with DIRECTORYOFFILE/file
