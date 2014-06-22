@@ -12,12 +12,66 @@ class PBS:
 
 	def __init__(self, host, scriptPath):
 		self.host = host
-		self.script = scriptPath
+		self.scriptPath = scriptPath
+
+	def generate_script(self, nodes, ppn, time, email, jname, qname):
+    		#Currently only creates Twister script which performs SWG and PWC
+	    script = """#PBS -k o
+#PBS -l nodes=%s:ppn=%s, walltime=%s
+#PBS -M %s
+#PBS -m abe
+#PBS -N %s
+#PBS -j oe
+#PBS -q %s
+#
+#
+
+set_nodes()
+{
+    > $TWISTER_HOME/bin/nodes #empties nodes file
+    
+    l=0
+    while read line
+    do
+    let x=$l%%%s
+    if (($x == 0))
+    then
+        echo $line >> $TWISTER_HOME/bin/nodes
+    fi
+    ((l++))
+    done < $PBS_NODEFILE
+	
+    sed -i \"1d\" $TWISTER_HOME/bin/nodes
+}
+	
+set_amq()
+{
+    read firstline < $PBS_NODEFILE
+    sed -i \"53c\uri = failover:(tcp://$firstline:6161)\" $TWISTER_HOME/bin/amq.properties
+}
+set_nodes
+set_amq
+
+cp $TWISTER_HOME/bin/twister.properties
+
+$AMQ_HOME/bin/activemq console &> ~/amq.out &
+$TWISTER_HOME/bin/start_twister.sh &> ~/twister.out &
+
+sleep 10
+
+# NOW, RUN FUNCTIONS TO PROCESS DATA!
+
+""" %(nodes, ppn, time, email, jname, qname, ppn)
+        
+	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
+	    scriptfile = open(self.scriptPath, "w")
+	    scriptfile.write(script)
+	    scriptfile.close()
 
 	def submit(self, script=None, parameters=None, label=None):
-		"""Submits a given script with given parameters to cluster"""
+		"""Submits and runs a given script with given parameters on cluster"""
 		if script is None:
-			script = self.script
+			script = self.scriptPath
 		
 		#transfer script file to remote host
 		scpHost = self.host + ":~"
@@ -45,17 +99,31 @@ if __name__ == "__main__":
 	Usage:
 		clusterLink.py (-h | --help)
 		clusterLink.py (-e | --echo) <arg>
-		clusterLink.py (-s <host> <scriptPath>)
-
+		clusterLink.py (-s <host> <scriptPath>) [-t <nodes> <ppn> <time> <email> <jname> <qname>]
+	
 	Options:
 		-h --help		Displays this help message
 		-e <arg>, --echo <arg>	Echo input text
 		-s <host> <scriptPath>	Submit given script to given host
+		-t			Creates script at given scriptPath and submits it to host
 	"""
 	
 	arguments = docopt(docString, version="cyberLink 1.0")
 
-	if arguments["-s"]:
+	if arguments["-t"]:
+		print "Started"
+		pbs = PBS(arguments["<host>"], arguments["<scriptPath>"])
+		nodes = arguments["<nodes>"]
+		ppn = arguments["<ppn>"]
+		time = arguments["<time>"]
+		email = arguments["<email>"]
+		jname = arguments["<jname>"]
+		qname = arguments["<qname>"]
+		pbs.generate_script(nodes, ppn, time, email, jname, qname)
+		
+		#pbs.submit()
+
+	elif arguments["-s"]:
 		print "Started"
 		pbs = PBS(arguments["<host>"], arguments["<scriptPath>"])
 		pbs.submit()
