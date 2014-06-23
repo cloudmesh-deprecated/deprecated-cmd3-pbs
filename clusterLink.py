@@ -61,6 +61,8 @@ sleep 10
 
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
 
+# SWG
+
 """ %(nodes, ppn, time, email, jname, qname, ppn)
         
 	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
@@ -98,14 +100,13 @@ if __name__ == "__main__":
 
 	Usage:
 		clusterLink.py (-h | --help)
-		clusterLink.py (-e | --echo) <arg>
-		clusterLink.py (-s <host> <scriptPath>) [-t <nodes> <ppn> <time> <email> <jname> <qname>]
+		clusterLink.py -p <scriptPath> (-s <host> | -t <nodes> <ppn> <time> <email> <jname> <qname>)
 	
 	Options:
 		-h --help		Displays this help message
-		-e <arg>, --echo <arg>	Echo input text
-		-s <host> <scriptPath>	Submit given script to given host
-		-t			Creates script at given scriptPath and submits it to host
+		-p <sciptPath>		path of script (existing or to be created)
+		-s <host>		Submit given script to given host
+		-t			Creates script with given parameters
 	"""
 	
 	arguments = docopt(docString, version="cyberLink 1.0")
@@ -121,7 +122,8 @@ if __name__ == "__main__":
 		qname = arguments["<qname>"]
 		pbs.generate_script(nodes, ppn, time, email, jname, qname)
 		
-		#pbs.submit()
+	if arguments["-s"] and arguments["-t"]:
+		pbs.submit()
 
 	elif arguments["-s"]:
 		print "Started"
