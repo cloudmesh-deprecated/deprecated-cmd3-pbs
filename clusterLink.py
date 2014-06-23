@@ -10,11 +10,10 @@ from sh import scp
 class PBS:
 	"""Generates and submits scripts to be run in cluster"""
 
-	def __init__(self, host, scriptPath):
+	def __init__(self, host):
 		self.host = host
-		self.scriptPath = scriptPath
 
-	def generate_script(self, nodes, ppn, time, email, jname, qname):
+	def generate_script(self, scriptPath, nodes, ppn, time, email, jname, qname):
     		#Currently only creates Twister script which performs SWG and PWC
 	    script = """#PBS -k o
 #PBS -l nodes=%s:ppn=%s, walltime=%s
@@ -61,19 +60,15 @@ sleep 10
 
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
 
-# SWG
-
 """ %(nodes, ppn, time, email, jname, qname, ppn)
         
 	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
-	    scriptfile = open(self.scriptPath, "w")
+	    scriptfile = open(scriptPath, "w")
 	    scriptfile.write(script)
 	    scriptfile.close()
 
-	def submit(self, script=None, parameters=None, label=None):
+	def submit(self, script, label=None):
 		"""Submits and runs a given script with given parameters on cluster"""
-		if script is None:
-			script = self.scriptPath
 		
 		#transfer script file to remote host
 		scpHost = self.host + ":~"
@@ -82,6 +77,13 @@ sleep 10
 		result = ssh(self.host, "qsub", script)
 		#Return an id...
 		return result
+
+	def get_status(self, jobid):
+		result = ssh(self.host, "checkjob", jobid)
+		return result
+
+	def transfer(self, files):
+				
 
 	def delete(self, id):
 		"""Delete a script? by its id"""
@@ -100,34 +102,49 @@ if __name__ == "__main__":
 
 	Usage:
 		clusterLink.py (-h | --help)
-		clusterLink.py -p <scriptPath> (-s <host> | -t <nodes> <ppn> <time> <email> <jname> <qname>)
+		clusterLink.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
+		clusterLink.py <host> -u <jobid>
+		clusterLink.py <host> -f <files>
 	
 	Options:
 		-h --help		Displays this help message
 		-p <sciptPath>		path of script (existing or to be created)
 		-s <host>		Submit given script to given host
-		-t			Creates script with given parameters
+		-t <parameters>		Creates script with given parameters
+		-u <jobid>		Return the status of the given job
+		-f <files>		transfers files at address or directory to host
+
+		-p -t			Generates script and saves it at given scriptPath
+		-p -s			Submits script at given scriptPath to given host
+		-p -s -t		Generates and saves script at given scriptPath and submits script to host
 	"""
 	
 	arguments = docopt(docString, version="cyberLink 1.0")
 
+	pbs = PBS(arguments["<host>"])
+
 	if arguments["-t"]:
 		print "Started"
-		pbs = PBS(arguments["<host>"], arguments["<scriptPath>"])
 		nodes = arguments["<nodes>"]
 		ppn = arguments["<ppn>"]
 		time = arguments["<time>"]
 		email = arguments["<email>"]
 		jname = arguments["<jname>"]
 		qname = arguments["<qname>"]
-		pbs.generate_script(nodes, ppn, time, email, jname, qname)
+		pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
 		
 	if arguments["-s"] and arguments["-t"]:
-		pbs.submit()
+		jobid = pbs.submit(arguments["<scriptPath>"])
+		print "Job ID: " + jobid
 
 	elif arguments["-s"]:
 		print "Started"
-		pbs = PBS(arguments["<host>"], arguments["<scriptPath>"])
 		pbs.submit()
+
+	if arguments["-u"]:
+		print pbs.get_status(arguments["<jobid>"])
+
+	if arguments["-f"]:
+		pbs.transfer(arguments["<files>"])
 
 	print "Complete"
