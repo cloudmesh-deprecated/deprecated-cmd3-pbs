@@ -82,14 +82,22 @@ sleep 10
 		result = ssh(self.host, "checkjob", jobid)
 		return result
 
-	def transfer(self, files):
-				
+	def transfer(self, files, remote=False):
+		if remote:
+			sh.wget("-P", "./files", files) #Places files within a local directory named "files"
+			scpHost = self.host + ":~"
+			scp(files,scpHost)
+		else:
+			scpHost = self.host + ":~"
+			scp(files, scpHost)
 
 	def delete(self, id):
-		"""Delete a script? by its id"""
+		"""Delete a script?/job? by its id"""
+		return None
 
 	def delete_by_label(self, label):
-		"""Delete a script? by its label"""
+		"""Delete a script?/job? by its label"""
+		return None
 
 
 if __name__ == "__main__":
@@ -104,7 +112,7 @@ if __name__ == "__main__":
 		clusterLink.py (-h | --help)
 		clusterLink.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
 		clusterLink.py <host> -u <jobid>
-		clusterLink.py <host> -f <files>
+		clusterLink.py <host> -f <file> [-r]
 	
 	Options:
 		-h --help		Displays this help message
@@ -112,7 +120,8 @@ if __name__ == "__main__":
 		-s <host>		Submit given script to given host
 		-t <parameters>		Creates script with given parameters
 		-u <jobid>		Return the status of the given job
-		-f <files>		transfers files at address or directory to host
+		-f <file>		transfers file directory or file at address to host
+		-r			indicates that files are located on a remote machine
 
 		-p -t			Generates script and saves it at given scriptPath
 		-p -s			Submits script at given scriptPath to given host
@@ -144,7 +153,9 @@ if __name__ == "__main__":
 	if arguments["-u"]:
 		print pbs.get_status(arguments["<jobid>"])
 
-	if arguments["-f"]:
-		pbs.transfer(arguments["<files>"])
+	if arguments["-f"] and arguments["-r"]:
+		pbs.transfer(arguments["<file>"], remote=True)
+	elif arguments["-f"]:
+		pbs.transfer(arguments["<file>"], remote=False)
 
 	print "Complete"
