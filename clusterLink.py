@@ -84,9 +84,9 @@ sleep 10
 
 	def transfer(self, files, remote=False):
 		if remote:
-			sh.wget("-P", "./files", files) #Places files within a local directory named "files"
+			sh.wget("-N", "-P", "./files", files) #Places files within a local directory named "files"
 			scpHost = self.host + ":~"
-			scp(files,scpHost)
+			scp("-r", "./files", scpHost)
 		else:
 			scpHost = self.host + ":~"
 			scp(files, scpHost)
