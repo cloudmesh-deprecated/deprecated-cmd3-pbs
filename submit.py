@@ -13,6 +13,40 @@ class PBS:
 	def __init__(self, host):
 		self.host = host
 
+	def submit(self, script, label=None):
+		"""Submits and runs a given script with given parameters on cluster"""
+		
+		#transfer script file to remote host
+		scpHost = self.host + ":~"
+		scp(script, scpHost)
+
+		result = ssh(self.host, "qsub", script)
+		#Return an id...
+		return result
+
+	def get_status(self, jobid):
+		result = ssh(self.host, "checkjob", jobid)
+		return result
+
+	def transfer(self, files, remote=False):
+		if remote:
+			sh.wget("-N", "-P", "./files", files) #Places files within a local directory named "files"
+			scpHost = self.host + ":~"
+			scp("-r", "./files", scpHost)
+		else:
+			scpHost = self.host + ":~"
+			scp(files, scpHost)
+
+	def delete(self, id):
+		"""Delete a script?/job? by its id"""
+		return None
+
+	def delete_by_label(self, label):
+		"""Delete a script?/job? by its label"""
+		return None
+
+class TwisterPBS(PBS):
+
 	def generate_script(self, scriptPath, nodes, ppn, time, email, jname, qname):
     		#Currently only creates Twister script which performs SWG and PWC
 	    script = """#PBS -k o
@@ -67,52 +101,20 @@ sleep 10
 	    scriptfile.write(script)
 	    scriptfile.close()
 
-	def submit(self, script, label=None):
-		"""Submits and runs a given script with given parameters on cluster"""
-		
-		#transfer script file to remote host
-		scpHost = self.host + ":~"
-		scp(script, scpHost)
-
-		result = ssh(self.host, "qsub", script)
-		#Return an id...
-		return result
-
-	def get_status(self, jobid):
-		result = ssh(self.host, "checkjob", jobid)
-		return result
-
-	def transfer(self, files, remote=False):
-		if remote:
-			sh.wget("-N", "-P", "./files", files) #Places files within a local directory named "files"
-			scpHost = self.host + ":~"
-			scp("-r", "./files", scpHost)
-		else:
-			scpHost = self.host + ":~"
-			scp(files, scpHost)
-
-	def delete(self, id):
-		"""Delete a script?/job? by its id"""
-		return None
-
-	def delete_by_label(self, label):
-		"""Delete a script?/job? by its label"""
-		return None
-
 
 if __name__ == "__main__":
 	"""Docopts will be used here for command line functionality"""
 	import docopt
 	from docopt import docopt
 	
-	docString = """ Cluster Link.
+	docString = """ submit.py
 	Connect to and submit scripts to FutureGrid computer clusters.
 
 	Usage:
-		clusterLink.py (-h | --help)
-		clusterLink.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
-		clusterLink.py <host> -u <jobid>
-		clusterLink.py <host> -f <file> [-r]
+		submit.py (-h | --help)
+		submit.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
+		submit.py <host> -u <jobid>
+		submit.py <host> -f <file> [-r]
 	
 	Options:
 		-h --help		Displays this help message
@@ -130,7 +132,7 @@ if __name__ == "__main__":
 	
 	arguments = docopt(docString, version="cyberLink 1.0")
 
-	pbs = PBS(arguments["<host>"])
+	pbs = TwisterPBS(arguments["<host>"])
 
 	if arguments["-t"]:
 		print "Started"
