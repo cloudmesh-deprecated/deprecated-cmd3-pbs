@@ -12,4 +12,7 @@ Progress
 	clusterLink.py successfully connects to cluster and submits a local scriptfile to be run.
 	Currently working on developing generate_script method in order to dynamically create scripts.
 
+	6/30:
+	clusterLink.py renamed to submit.py - still working on reformatting string style for script creation
+
 
