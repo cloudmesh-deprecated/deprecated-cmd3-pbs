@@ -16,23 +16,23 @@ class PBS:
 	def generate_script(self, scriptPath, nodes, ppn, time, email, jname, qname):
     		#Currently only creates Twister script which performs SWG and PWC
 	    script = """#PBS -k o
-#PBS -l nodes={nodes}:ppn={ppn}, walltime={walltime}
-#PBS -M {email}
+#PBS -l nodes=%(nodes)s:ppn=%(ppn)s, walltime=%(time)s
+#PBS -M %(email)s
 #PBS -m abe
-#PBS -N {jname}
+#PBS -N %(jname)s
 #PBS -j oe
-#PBS -q {qname}
+#PBS -q %(qname)s
 #
 #
 
 set_nodes()
 {
-    > $TWISTER_HOME/bin/nodes #empties nodes file
+    > $TWISTER_HOME/bin/nodes
     
     l=0
     while read line
     do
-    let x=$l%%{ppn}
+    let x=$l%%%(ppn)s
     if (($x == 0))
     then
         echo $line >> $TWISTER_HOME/bin/nodes
@@ -60,7 +60,7 @@ sleep 10
 
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
 
-""".format(nodes=nodes, ppn=ppn, walltime=time, email=email, jname=jname, qname=qname)
+""" % vars()
         
 	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
 	    scriptfile = open(scriptPath, "w")
