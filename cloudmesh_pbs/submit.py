@@ -1,11 +1,77 @@
 import sh
 from sh import ssh
 from sh import scp
+import docopt
+from docopt import docopt
 
+    
 #Test connection
 #result = ssh("india.futuregrid.org", "pwd") #Runs one command at a time
 #print result
 #print "Success"
+
+def shell_command_pbs(arguments):
+	"""Connect to and submit scripts to FutureGrid computer clusters.
+
+	Usage:
+		submit.py (-h | --help)
+		submit.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
+		submit.py <host> -u <jobid>
+		submit.py <host> -f <file> [-r]
+	
+	Options:
+		-h --help		Displays this help message
+		-p <scriptPath>		path of script (existing or to be created)
+		-s <host>		Submit given script to given host
+		-t <parameters>		Creates script with given parameters
+		-u <jobid>		Return the status of the given job
+		-f <file>		transfers file directory or file at address to host
+		-r			indicates that files are located on a remote machine
+
+		-p -t			Generates script and saves it at given scriptPath
+		-p -s			Submits script at given scriptPath to given host
+		-p -s -t		Generates and saves script at given scriptPath and submits script to host
+
+
+    Examples:
+        bla bla
+    """
+
+	arguments = docopt(docString, version="cyberLink 1.0")
+
+	pbs = TwisterPBS(arguments["<host>"])
+
+	if arguments["-t"]:
+		print "Started"
+		nodes = arguments["<nodes>"]
+		ppn = arguments["<ppn>"]
+		time = arguments["<time>"]
+		email = arguments["<email>"]
+		jname = arguments["<jname>"]
+		qname = arguments["<qname>"]
+		pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
+		
+	if arguments["-s"] and arguments["-t"]:
+		jobid = pbs.submit(arguments["<scriptPath>"])
+		print "Job ID: " + jobid
+
+	elif arguments["-s"]:
+		print "Started"
+		pbs.submit()
+
+	if arguments["-u"]:
+		print pbs.get_status(arguments["<jobid>"])
+
+	if arguments["-f"] and arguments["-r"]:
+		pbs.transfer(arguments["<file>"], remote=True)
+	elif arguments["-f"]:
+		pbs.transfer(arguments["<file>"], remote=False)
+
+	print "Complete"
+    	
+
+
+
 
 class PBS:
 	"""Generates and submits scripts to be run in cluster"""
@@ -101,63 +167,10 @@ sleep 10
 	    scriptfile.write(script)
 	    scriptfile.close()
 
+def main():
+    arguments = docopt(shell_command_pbs.__doc__)
+    shell_command_pbs(arguments)
 
+        
 if __name__ == "__main__":
-	"""Docopts will be used here for command line functionality"""
-	import docopt
-	from docopt import docopt
-	
-	docString = """ submit.py
-	Connect to and submit scripts to FutureGrid computer clusters.
-
-	Usage:
-		submit.py (-h | --help)
-		submit.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
-		submit.py <host> -u <jobid>
-		submit.py <host> -f <file> [-r]
-	
-	Options:
-		-h --help		Displays this help message
-		-p <sciptPath>		path of script (existing or to be created)
-		-s <host>		Submit given script to given host
-		-t <parameters>		Creates script with given parameters
-		-u <jobid>		Return the status of the given job
-		-f <file>		transfers file directory or file at address to host
-		-r			indicates that files are located on a remote machine
-
-		-p -t			Generates script and saves it at given scriptPath
-		-p -s			Submits script at given scriptPath to given host
-		-p -s -t		Generates and saves script at given scriptPath and submits script to host
-	"""
-	
-	arguments = docopt(docString, version="cyberLink 1.0")
-
-	pbs = TwisterPBS(arguments["<host>"])
-
-	if arguments["-t"]:
-		print "Started"
-		nodes = arguments["<nodes>"]
-		ppn = arguments["<ppn>"]
-		time = arguments["<time>"]
-		email = arguments["<email>"]
-		jname = arguments["<jname>"]
-		qname = arguments["<qname>"]
-		pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
-		
-	if arguments["-s"] and arguments["-t"]:
-		jobid = pbs.submit(arguments["<scriptPath>"])
-		print "Job ID: " + jobid
-
-	elif arguments["-s"]:
-		print "Started"
-		pbs.submit()
-
-	if arguments["-u"]:
-		print pbs.get_status(arguments["<jobid>"])
-
-	if arguments["-f"] and arguments["-r"]:
-		pbs.transfer(arguments["<file>"], remote=True)
-	elif arguments["-f"]:
-		pbs.transfer(arguments["<file>"], remote=False)
-
-	print "Complete"
+    main()
