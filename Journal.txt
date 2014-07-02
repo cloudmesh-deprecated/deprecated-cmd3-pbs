@@ -149,4 +149,6 @@ ________________________________________________________________________________
 		Initial user/user manual??
 		Need to figure out .yaml files
 	- Still need to install CMD3 before being able to integrate submit.py
-	- Can ssh access computer from another machine: ip: 156.56.95.49
+	- Can ssh access computer from another machine.
+
+
