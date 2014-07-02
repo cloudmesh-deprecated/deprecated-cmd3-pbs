@@ -9,12 +9,15 @@ Currently, the computer cluster in use is India on FutureGrid.
 Setting up submit.py within environment:
 ================================================
 pip install -r requirements.txt
+
 python setup.py install
 
 Running submit.py within environment:
 ================================================
 cm-pbs
+
 python cloudmesh_pbs/submit.py
+
 cm
 
 Usage
