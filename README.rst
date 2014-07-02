@@ -1,3 +1,10 @@
+pip install -r requirements.txt
+python setup.py install
+
+cm-pbs
+python cloudmesh_pbs/submit.py
+cm
+
 clusterLink
 ===========
 
