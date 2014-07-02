@@ -151,4 +151,5 @@ ________________________________________________________________________________
 	- Still need to install CMD3 before being able to integrate submit.py
 	- Can ssh access computer from another machine.
 
-
+7/2 - Managed to run CMD3 in terminal
+	- Working on integrating submit.py with cmd3
