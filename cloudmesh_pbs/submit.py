@@ -41,7 +41,10 @@ def shell_command_pbs(arguments):
 
 	arguments = docopt(docString, version="cyberLink 1.0")
 
-	pbs = TwisterPBS(arguments["<host>"])
+	if arguments["-t"]:
+		pbs = TwisterPBS(arguments["<host>"])
+	else:
+		pbs = PBS(arguments["<host>"])
 
 	if arguments["-c"]:
 		print "Started"
@@ -49,9 +52,9 @@ def shell_command_pbs(arguments):
 		ppn = arguments["<ppn>"]
 		time = arguments["<time>"]
 		email = arguments["<email>"]
-		jname = arguments["<jname>"]
-		qname = arguments["<qname>"]
-		script = pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
+		jobname = arguments["<jname>"]
+		queuename = arguments["<qname>"]
+		script = pbs.generate_script(nodes, ppn, time, email, jobname, queuename)
 		pbs.save_script(script, arguments["<scriptPath>"])
 		
 	if arguments["-s"]:
@@ -63,9 +66,9 @@ def shell_command_pbs(arguments):
 		print pbs.get_status(arguments["<jobid>"])
 
 	if arguments["-f"] and arguments["-r"]:
-		pbs.transfer(arguments["<file>"], remote=True)
+		pbs.transfer(arguments["<filePath>"], remote=True)
 	elif arguments["-f"]:
-		pbs.transfer(arguments["<file>"], remote=False)
+		pbs.transfer(arguments["<filePath>"], remote=False)
 
 	print "Complete"
     	
@@ -79,18 +82,33 @@ class PBS:
 	def __init__(self, host):
 		self.host = host
 
-	def submit(self, script, label=None):
-		"""Submits and runs a given script with given parameters on cluster"""
+	def submit(self, scriptPath):
+		""".. function:: submit(scriptPath):
+
+		      Submits and runs a given local script with given parameters on cluster
+			
+		      :param scriptPath: path of script on local machine"""
 		
 		#transfer script file to remote host
 		scpHost = self.host + ":~"
-		scp(script, scpHost)
+		scp(scriptPath, scpHost)
 
 		result = ssh(self.host, "qsub", script)
 		#Return an id...
 		return result
 
-	def generate_script(self, scriptPath, nodes, ppn, time, email, jobname, queuename):
+	def generate_script(self, nodes, ppn, time, email, jobname, queuename):
+		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename)
+		     
+		      Generate a string representing a basic PBS script
+
+	              :param nodes: number of nodes desired on cluster
+	    	      :param ppn: number of processors per node
+	    	      :param time: time required for job: 'hh:mm:ss'
+	    	      :param email: email to send job progress info
+	    	      :param jobname: name of job
+	    	      :param queuename: name of queue on which to run job"""
+
 		script = """#PBS -k o
 #PBS -l nodes %(nodes)s:ppn=%(ppn)s, walltime=%(time)s
 #PBS -M %(email)s
@@ -103,38 +121,79 @@ class PBS:
 """ % vars()
 		return script
 	
-	def save_script(self, script, scriptPath):	
-	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
-	    scriptfile = open(scriptPath, "w")
-	    scriptfile.write(script)
-	    scriptfile.close()
+	def save_script(self, script, scriptPath):
+		""".. function:: save_script(script, scriptPath)
+		      
+		      Save script to the local scriptPath given
+
+		      :param script: string representing PBS script
+		      :param scriptPath: local path to store script"""
+
+		#WRITE SCRIPT TO FILE - This file will be transferred with submit method
+		scriptfile = open(scriptPath, "w")
+		scriptfile.write(script)
+		scriptfile.close()
 
 	def get_status(self, jobid):
+		""".. function:: get_status(jobid)
+
+		      Return the current status of the job referenced by the given jobid
+
+		      :param jobid: id of job to check on host"""
+
 		result = ssh(self.host, "checkjob", jobid)
 		return result
 
-	def transfer(self, files, remote=False):
+	def transfer(self, filePath, remote=False):
+		""".. function:: transfer(files, remote)
+
+		      Transfer files, local or remote, to host specified on command line
+
+		      :param filePath: path/address of files to be transferred to host
+		      :param remote: boolean dictating if files are remote (true) or local (false)"""
+
 		if remote:
-			sh.wget("-N", "-P", "./files", files) #Places files within a local directory named "files"
+			sh.wget("-N", "-P", "./files", filePath) #Places files within a local directory named "files"
 			scpHost = self.host + ":~"
 			scp("-r", "./files", scpHost)
 		else:
 			scpHost = self.host + ":~"
-			scp(files, scpHost)
+			scp(filePath, scpHost) #May need to edit command to recursively handle directories
 
 	def delete(self, id):
-		"""Delete a script?/job? by its id"""
+		""".. function:: delete(id)
+
+		      Delete a script?/job? by its id
+		
+		      :param id: id of job on cluster.."""
+
 		return None
 
 	def delete_by_label(self, label):
-		"""Delete a script?/job? by its label"""
+		""".. function:: delete_by_label(label)
+
+		      Delete a script?/job? by its label
+
+		      :param label: label of job on cluster.."""
+
 		return None
 
 class TwisterPBS(PBS):
 
-	def generate_script(self, scriptPath, nodes, ppn, time, email, jobname, queuename):
-    		#Currently only creates Twister script which performs SWG and PWC
-	    twistscript = super.generate_script(scriptPath, nodes, ppn, time, email, jobname, queuename) + """
+	def generate_script(self, nodes, ppn, time, email, jobname, queuename):
+		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename)
+
+		      See PBS.generate_script(): Creates a twister specific PBS script string
+			
+		      :param nodes: nodes to use on cluster
+		      :param ppn: processors to use per node
+		      :param time: time required for job: 'hh:mm:ss'
+		      :param email: email to send job progress info
+		      :param jobname: name of job
+		      :param queuename: name of queue on which to run job"""
+
+		#Currently only creates Twister script which performs SWG and PWC
+		twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename) + """
 set_nodes()
 {
     > $TWISTER_HOME/bin/nodes
@@ -172,7 +231,8 @@ sleep 10
 
 """ % vars()
 
-	    return twistscript
+		return twistscript
+
 
 def main():
     arguments = docopt(shell_command_pbs.__doc__)
