@@ -172,7 +172,7 @@ sleep 10
 
 """ % vars()
 
-		return twistscript
+	    return twistscript
 
 def main():
     arguments = docopt(shell_command_pbs.__doc__)
