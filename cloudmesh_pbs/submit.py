@@ -1,6 +1,7 @@
 import sh
 from sh import ssh
 from sh import scp
+
 import docopt
 from docopt import docopt
 
@@ -16,34 +17,33 @@ def shell_command_pbs(arguments):
 	Usage:
 		submit.py (-h | --help)
 		submit.py <host> <scriptPath> -s 
-        submit.py <host> <scriptPath> [-s] -t <nodes> <ppn> <time> <email> <jname> <qname>
+	        submit.py <host> <scriptPath> [-s] [-t] -c <nodes> <ppn> <time> <email> <jobname> <queuename>
 		submit.py <host> -u <jobid>
-		submit.py <host> -f <file> [-r]
+		submit.py <host> -f <filePath> [-r]
 	
 	Options:
-		-h --help	 Displays this help message
-		-p <scriptPath>	 path of script (existing or to be created)
-		-s <host>	 Submit given script to given host
-		-t <parameters>	 Creates script with given parameters
-		-u <jobid>	 Return the status of the given job
-		-f <file>	 transfers file directory or file at address to host
-		-r		 indicates that files are located on a remote machine
+		(-h --help)	 Displays this help message
+		-s <host>	 Submit given PBS script to given host
+		-c <parameters>	 Creates PBS script with given parameters and saves it to <scriptPath>
+		[-t]		 Creates a TwisterPBS script instead of a PBS script
+		
+		-f <filePath>	 transfers file directory or file at address to host
+		[-r]		 indicates that files are located on a remote machine
 
-		-p -t		 Generates script and saves it at given scriptPath
-		-p -s		 Submits script at given scriptPath to given host
+		-u <jobid>	 Return the status of the given jobid
 
-       	-p -s -t 	 Generates and saves script at given
-		             scriptPath and submits script to host
-
-    Examples:
-        bla bla
+        Examples:
+		submit.py -h
+        	submit.py -s -t india.futuregrid.org ./myPBSScript 2 8 24:00:00 me@myemail.com job queue
+		submit.py -s india.futuregrid.org ./myPremadePBSScript
+		submit.py -f india.futuregrid.org ./myfiles
     """
 
 	arguments = docopt(docString, version="cyberLink 1.0")
 
 	pbs = TwisterPBS(arguments["<host>"])
 
-	if arguments["-t"]:
+	if arguments["-c"]:
 		print "Started"
 		nodes = arguments["<nodes>"]
 		ppn = arguments["<ppn>"]
@@ -51,15 +51,13 @@ def shell_command_pbs(arguments):
 		email = arguments["<email>"]
 		jname = arguments["<jname>"]
 		qname = arguments["<qname>"]
-		pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
+		script = pbs.generate_script(arguments["<scriptPath>"], nodes, ppn, time, email, jname, qname)
+		pbs.save_script(script, arguments["<scriptPath>"])
 		
-	if arguments["-s"] and arguments["-t"]:
+	if arguments["-s"]:
+		print "Started"
 		jobid = pbs.submit(arguments["<scriptPath>"])
 		print "Job ID: " + jobid
-
-	elif arguments["-s"]:
-		print "Started"
-		pbs.submit()
 
 	if arguments["-u"]:
 		print pbs.get_status(arguments["<jobid>"])
@@ -92,6 +90,25 @@ class PBS:
 		#Return an id...
 		return result
 
+	def generate_script(self, scriptPath, nodes, ppn, time, email, jobname, queuename):
+		script = """#PBS -k o
+#PBS -l nodes %(nodes)s:ppn=%(ppn)s, walltime=%(time)s
+#PBS -M %(email)s
+#PBS -m abe
+#PBS -N %(jobname)s
+#PBS -j oe
+#PBS -q %(queuename)s
+#
+#
+""" % vars()
+		return script
+	
+	def save_script(self, script, scriptPath):	
+	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
+	    scriptfile = open(scriptPath, "w")
+	    scriptfile.write(script)
+	    scriptfile.close()
+
 	def get_status(self, jobid):
 		result = ssh(self.host, "checkjob", jobid)
 		return result
@@ -115,18 +132,9 @@ class PBS:
 
 class TwisterPBS(PBS):
 
-	def generate_script(self, scriptPath, nodes, ppn, time, email, jname, qname):
+	def generate_script(self, scriptPath, nodes, ppn, time, email, jobname, queuename):
     		#Currently only creates Twister script which performs SWG and PWC
-	    script = """#PBS -k o
-#PBS -l nodes=%(nodes)s:ppn=%(ppn)s, walltime=%(time)s
-#PBS -M %(email)s
-#PBS -m abe
-#PBS -N %(jname)s
-#PBS -j oe
-#PBS -q %(qname)s
-#
-#
-
+	    twistscript = super.generate_script(scriptPath, nodes, ppn, time, email, jobname, queuename) + """
 set_nodes()
 {
     > $TWISTER_HOME/bin/nodes
@@ -163,11 +171,8 @@ sleep 10
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
 
 """ % vars()
-        
-	    #WRITE SCRIPT TO FILE - This file will be transferred with submit method
-	    scriptfile = open(scriptPath, "w")
-	    scriptfile.write(script)
-	    scriptfile.close()
+
+		return twistscript
 
 def main():
     arguments = docopt(shell_command_pbs.__doc__)
