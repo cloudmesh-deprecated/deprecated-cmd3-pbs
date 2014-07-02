@@ -15,23 +15,25 @@ def shell_command_pbs(arguments):
 
 	Usage:
 		submit.py (-h | --help)
-		submit.py <host> <scriptPath> (-s | -t <nodes> <ppn> <time> <email> <jname> <qname>)
+		submit.py <host> <scriptPath> -s 
+        submit.py <host> <scriptPath> [-s] -t <nodes> <ppn> <time> <email> <jname> <qname>
 		submit.py <host> -u <jobid>
 		submit.py <host> -f <file> [-r]
 	
 	Options:
-		-h --help		Displays this help message
-		-p <scriptPath>		path of script (existing or to be created)
-		-s <host>		Submit given script to given host
-		-t <parameters>		Creates script with given parameters
-		-u <jobid>		Return the status of the given job
-		-f <file>		transfers file directory or file at address to host
-		-r			indicates that files are located on a remote machine
+		-h --help	 Displays this help message
+		-p <scriptPath>	 path of script (existing or to be created)
+		-s <host>	 Submit given script to given host
+		-t <parameters>	 Creates script with given parameters
+		-u <jobid>	 Return the status of the given job
+		-f <file>	 transfers file directory or file at address to host
+		-r		 indicates that files are located on a remote machine
 
-		-p -t			Generates script and saves it at given scriptPath
-		-p -s			Submits script at given scriptPath to given host
-		-p -s -t		Generates and saves script at given scriptPath and submits script to host
+		-p -t		 Generates script and saves it at given scriptPath
+		-p -s		 Submits script at given scriptPath to given host
 
+       	-p -s -t 	 Generates and saves script at given
+		             scriptPath and submits script to host
 
     Examples:
         bla bla
