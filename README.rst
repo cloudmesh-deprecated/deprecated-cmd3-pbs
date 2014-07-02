@@ -1,25 +1,26 @@
+Setting up submit.py within environment:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 pip install -r requirements.txt
 python setup.py install
 
+Running submit.py within environment:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 cm-pbs
 python cloudmesh_pbs/submit.py
 cm
 
-clusterLink
-===========
+cloudmesh_pbs
+================================================
 
-Python program which submits PBS jobs to computer clusters.
+Python program which submits PBS jobs to computer clusters. This program is titled submit.py (within cloudmesh_pbs)
 
 Currently, the computer cluster in use is India on FutureGrid.
 
+Usage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 Progress
-
-	6/23: 
-	clusterLink.py successfully connects to cluster and submits a local scriptfile to be run.
-	Currently working on developing generate_script method in order to dynamically create scripts.
-
-	6/30:
-	clusterLink.py renamed to submit.py - still working on reformatting string style for script creation
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Look at doc/journal.rst
 
