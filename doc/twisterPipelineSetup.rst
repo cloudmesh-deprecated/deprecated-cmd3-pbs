@@ -30,7 +30,7 @@ There are a lot of steps... I probably did not get all of them down, but here ar
 
 - Optional: Download JAVA JDK in order to have original JDK as a backup.
 
-1. Start ActiveMQ: AMQ_HOME/bin/activemq
+1. Start ActiveMQ: AMQ_HOME/bin/activemq console
 2. Run start_twister.sh from TWISTER_HOME/bin
 
 
