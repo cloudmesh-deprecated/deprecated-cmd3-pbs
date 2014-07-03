@@ -13,7 +13,8 @@ There are a lot of steps... I probably did not get all of them down, but here ar
 	- Any steps involving NaradaBrokering, skip or do with AMQ.
 
 	-**IP address needs to be changed in appropriate files every time this is run from new nodes/computer: 
-		TWISTER/bin/nodes, 
+		TWISTER/bin/nodes
+		
 		url in amq.properties in TWISTER/bin
 
 	-*Make sure other file locations are correct in files mentioned in the userguide above
