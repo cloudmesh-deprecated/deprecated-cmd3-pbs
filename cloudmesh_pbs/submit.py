@@ -98,8 +98,8 @@ class PBS:
 		#Return an id...
 		return result
 
-	def generate_script(self, nodes, ppn, time, email, jobname, queuename):
-		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath="")
+	def generate_script(self, nodes, ppn, time, email, jobname, queuename, executablePath=""):
+		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
 		     
 		      Generate a string representing a basic PBS script
 
@@ -184,8 +184,8 @@ class PBS:
 
 class TwisterPBS(PBS):
 
-	def generate_script(self, nodes, ppn, time, email, jobname, queuename):
-		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename)
+	def generate_script(self, nodes, ppn, time, email, jobname, queuename, executablePath=""):
+		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
 
 		      See PBS.generate_script(): Creates a twister specific PBS script string
 			
@@ -194,10 +194,11 @@ class TwisterPBS(PBS):
 		      :param time: time required for job: 'hh:mm:ss'
 		      :param email: email to send job progress info
 		      :param jobname: name of job
-		      :param queuename: name of queue on which to run job"""
+		      :param queuename: name of queue on which to run job
+		      :param executablePath: path of an executable to be run on host"""
 
 		#Currently only creates Twister script which performs SWG and PWC
-		twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename) + """
+		twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath) + """
 set_nodes()
 {
     > $TWISTER_HOME/bin/nodes
