@@ -161,6 +161,7 @@ ________________________________________________________________________________
 7/3 - Set up SSH access to india on futuregrid from Ubuntu machine: check .bashrc
 	- Was briefed on poster -NEED TO START
 	- Worked on submit.py generate_script() - added ability to run an executable
+	- Began integrating Celery management system into submit.py system.
 	- Manual for OpenPBS
 		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/openpbs_manual.pdf
 	- Examples
