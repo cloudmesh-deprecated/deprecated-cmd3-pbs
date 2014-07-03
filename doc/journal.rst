@@ -153,3 +153,7 @@ ________________________________________________________________________________
 
 7/2 - Managed to run CMD3 in terminal
 	- Working on integrating submit.py with cmd3
+	- Gregor helped integrate submit.py into cmd3
+	- spent time refining, cleaning up, and documenting code
+	- need to set up quarry jobs
+	- also need to talk to Saliya about next steps for program
