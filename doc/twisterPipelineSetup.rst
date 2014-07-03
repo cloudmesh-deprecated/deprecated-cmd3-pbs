@@ -26,7 +26,7 @@ There are a lot of steps... I probably did not get all of them down, but here ar
 	- TWISTER_HOME
 	- ANT_HOME
 	- JAVA_HOME
-	- AMQ_HOME
+	- AMQ_HOME (check .bashrc file to see if environmental variable is AMQ_HOME or ACTIVEMQ_HOME if it already exists)
 
 - Optional: Download JAVA JDK in order to have original JDK as a backup.
 
