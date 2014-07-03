@@ -157,3 +157,11 @@ ________________________________________________________________________________
 	- spent time refining, cleaning up, and documenting code
 	- need to set up quarry jobs
 	- also need to talk to Saliya about next steps for program
+
+7/3 - Set up SSH access to india on futuregrid from Ubuntu machine: check .bashrc
+	- Was briefed on poster -NEED TO START
+	- Worked on submit.py generate_script() - added ability to run an executable
+	- Manual for OpenPBS
+		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/openpbs_manual.pdf
+	- Examples
+		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/PBS_HOW_TO.html

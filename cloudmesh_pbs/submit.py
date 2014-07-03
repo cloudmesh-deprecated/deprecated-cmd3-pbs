@@ -17,7 +17,7 @@ def shell_command_pbs(arguments):
 	Usage:
 		submit.py (-h | --help)
 		submit.py <host> <scriptPath> -s 
-	        submit.py <host> <scriptPath> [-s] [-t] -c <nodes> <ppn> <time> <email> <jobname> <queuename>
+	        submit.py <host> <scriptPath> [-s] [-t] -c <nodes> <ppn> <time> <email> <jobname> <queuename> <executablePath>
 		submit.py <host> -u <jobid>
 		submit.py <host> -f <filePath> [-r]
 	
@@ -54,7 +54,8 @@ def shell_command_pbs(arguments):
 		email = arguments["<email>"]
 		jobname = arguments["<jname>"]
 		queuename = arguments["<qname>"]
-		script = pbs.generate_script(nodes, ppn, time, email, jobname, queuename)
+		executablePath = arguments["<executablePath>"]
+		script = pbs.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
 		pbs.save_script(script, arguments["<scriptPath>"])
 		
 	if arguments["-s"]:
@@ -98,7 +99,7 @@ class PBS:
 		return result
 
 	def generate_script(self, nodes, ppn, time, email, jobname, queuename):
-		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename)
+		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath="")
 		     
 		      Generate a string representing a basic PBS script
 
@@ -107,7 +108,8 @@ class PBS:
 	    	      :param time: time required for job: 'hh:mm:ss'
 	    	      :param email: email to send job progress info
 	    	      :param jobname: name of job
-	    	      :param queuename: name of queue on which to run job"""
+	    	      :param queuename: name of queue on which to run job
+		      :param executablePath: path of executable file on machine which job will run"""
 
 		script = """#PBS -k o
 #PBS -l nodes %(nodes)s:ppn=%(ppn)s, walltime=%(time)s
@@ -118,6 +120,8 @@ class PBS:
 #PBS -q %(queuename)s
 #
 #
+
+%(executablePath)s
 """ % vars()
 		return script
 	
