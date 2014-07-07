@@ -79,7 +79,7 @@ NOTES:
 		
 		gene_block_prefix = prefix before file name (same as from pwaFileSplitter)
 		
-		tmp_output_prefix = prefix for output files
+		tmp_output_prefix = prefix for output files (used in run_dasmacof_cg_mem.sh)
 		
 		aligner type = SWG or NW
 		
