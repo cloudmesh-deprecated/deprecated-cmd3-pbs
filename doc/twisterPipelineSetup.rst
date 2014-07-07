@@ -133,7 +133,7 @@ NEXT, SPLIT WEIGHTS
 
 - 1. The number of cores running job (nodes * ppn)
 - 2. Output folder of pwaMul.sh (Distance files)
-- 3. <prefixFromFileSpliter>_pid_
+- 3. <Output prefix from pwaMul>_pid_
 - 4. same as temp file prefix from mdsFileSplit
 - 5. same as output IDs file from mdsFileSplit
 - 6. "NoLabel"
