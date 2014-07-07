@@ -70,7 +70,6 @@ NOTES:
 		data_dir = directory in which data was stored (same as out_dir from pwaFileSplitter)
 		gene_block_prefix = prefix before file name (same as from pwaFileSplitter)
 		tmp_output_prefix = prefix for output files
-		output_map_file = name of output map file (arbitrary)
 		aligner type = SWG or NW
 		score matrix type = edn or blo
 		sequence type = RNA or DNA
