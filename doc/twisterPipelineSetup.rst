@@ -51,9 +51,13 @@ NOTES:
 	[lsaggu@i97 dacidr]$ ./pwaFileSpliter.sh ~/data/test/4640_fasta.txt 4640 16 ~/data/test/16/ input_ ~/data/test/4640_16.idx RNA
 		
 		num_of_partitions = number of cores (nodes*cores) Don't include head node  Partitions gene sequence files into more manageable sized units
+		
 		out_dir = directory to output files
+		
 		gene_block_prefix = prefix before file name (i.e. input_???)
+		
 		output_idx file = location/name of file to store output idx....
+		
 		Alphabet = alphabet to use to read sequences: 'RNA' in most cases.
 		
 
@@ -64,14 +68,23 @@ NOTES:
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ 123 SWG edn RNA
 	
 		num_of_map_tasks = number of cores (nodes*ppn) Don't include head node
+		
 		num_of_reduce_tasks = number of nodes (Don't include head node)
+		
 		sequence_count = number of sequences
+		
 		num_of_partitions = number of cores
+		
 		data_dir = directory in which data was stored (same as out_dir from pwaFileSplitter)
+		
 		gene_block_prefix = prefix before file name (same as from pwaFileSplitter)
+		
 		tmp_output_prefix = prefix for output files
+		
 		aligner type = SWG or NW
+		
 		score matrix type = edn or blo
+		
 		sequence type = RNA or DNA
 
 
