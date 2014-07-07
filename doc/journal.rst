@@ -166,3 +166,10 @@ ________________________________________________________________________________
 		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/openpbs_manual.pdf
 	- Examples
 		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/PBS_HOW_TO.html
+
+Week 6
+________________________________________________________________________________________________________________________________________
+7/7 - Worked on installing Django and Celery for Python
+	- Spent time reading up on celery and its usage
+	- Worked with Yang to process test data
+	- Began processing new data set
