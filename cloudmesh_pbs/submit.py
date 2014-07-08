@@ -44,7 +44,7 @@ def shell_command_pbs(arguments):
 		submit.py -f india.futuregrid.org ./myfiles
     """
 
-	arguments = docopt(docString, version="cyberLink 1.0")
+#	arguments = docopt(docString, version="cyberLink 1.0")
 
 	if arguments["-t"]:
 		pbs = TwisterPBS(arguments["<host>"])

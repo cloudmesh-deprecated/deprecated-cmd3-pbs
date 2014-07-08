@@ -173,3 +173,8 @@ ________________________________________________________________________________
 	- Spent time reading up on celery and its usage
 	- Worked with Yang to process test data
 	- Began processing new data set
+
+7/8 - Focused time working on poster
+	- Continued processing new data
+	- Need to talk to Fugang about Cloudmesh Usage... Submit doesn't work in cm shell
+	- Need to request more Quarry nodes.
