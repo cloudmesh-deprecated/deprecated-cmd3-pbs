@@ -71,8 +71,6 @@ NOTES:
 		output_idx file = location/name of file to store output idx....
 
 		Alphabet = alphabet to use to read sequences: 'RNA' in most cases.
-
-		Alphabet = alphabet to use to read sequences: 'RNA' in most cases.
 		
 
 
