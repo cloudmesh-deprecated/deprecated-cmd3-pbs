@@ -61,31 +61,28 @@ NOTES:
 	[lsaggu@i97 dacidr]$ ./pwaFileSpliter.sh ~/data/test/4640_fasta.txt 
 		4640 16 ~/data/test/16/ input_ ~/data/test/4640_16.idx RNA
 		
-<<<<<<< HEAD
+
 		num_of_partitions = number of cores....?  Partitions gene 
 			sequence files into more manageable sized units
-=======
+
 		num_of_partitions = number of cores (nodes*cores) Don't include head node  Partitions gene sequence files into more manageable sized units
 		
->>>>>>> e9c4202e2f5b53348e02909dbf3040c65ba0a54a
 		out_dir = directory to output files
 		
 		gene_block_prefix = prefix before file name (i.e. input_???)
 		
 		output_idx file = location/name of file to store output idx....
-<<<<<<< HEAD
+
 		Alphabet = alphabet to use to read sequences: 'RNA' in most 
 			cases.
-=======
-		
+
 		Alphabet = alphabet to use to read sequences: 'RNA' in most cases.
->>>>>>> e9c4202e2f5b53348e02909dbf3040c65ba0a54a
 		
 
 
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh
 	THis generates pid_ as well
-<<<<<<< HEAD
+	
 	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] 
 		[num_of_partitions] [data_dir] [gene_block_prefix] 
 		[tmp_output_prefix] [output_map_file] [aligner type]
@@ -93,7 +90,7 @@ NOTES:
 	
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ 
 		input_ swg_ 123 SWG edn RNA
-=======
+
 	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] 		[output_map_file] [aligner type][score matrix type] [sequence type]
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ 123 SWG edn RNA
 	
@@ -116,11 +113,11 @@ NOTES:
 		score matrix type = edn or blo
 		
 		sequence type = RNA or DNA
->>>>>>> e9c4202e2f5b53348e02909dbf3040c65ba0a54a
 
 
 
 ------RUNNING MDS-----------------------------------------------------------------------------------
+
 FIRST RUN RANDOM WEIGHTS
 - Generate a random weights output folder.
 - In Twister_HOME directory, go to samples/dacidr
