@@ -28,6 +28,8 @@ Usage
 
 - Connecting to computer clusters requires that local machine has ssh keys set up with FutureGrid
 
+-** In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format.
+
 
 	Usage:
 		submit.py (-h | --help)

@@ -178,3 +178,12 @@ ________________________________________________________________________________
 	- Continued processing new data
 	- Need to talk to Fugang about Cloudmesh Usage... Submit doesn't work in cm shell
 	- Need to request more Quarry nodes.
+
+7/9 - Met with Saliya to discuss next steps
+	- Need to process 57K sequences once nodes are obtained on Quarry
+	- Need to set up MongoDB and MongoEngine - Develop history trace.
+	- Need to Adjust AMQ memory
+	- Need to meet with Fugang and discuss Cloudmesh integration
+	- Worked on completing poster text - submitted it to be reviewed by Saliya and co.
+
+7/10

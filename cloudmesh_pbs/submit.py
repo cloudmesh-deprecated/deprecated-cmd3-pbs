@@ -1,8 +1,7 @@
+#!/usr/bin/python2.7
 import sh
 from sh import ssh
 from sh import scp
-
-from celery import Celery
 
 import docopt
 from docopt import docopt
@@ -13,9 +12,8 @@ from docopt import docopt
 #print result
 #print "Success"
 
-app = Celery('submit', broker='django://')
 
-@app.task
+
 def shell_command_pbs(arguments):
 	"""Connect to and submit scripts to FutureGrid computer clusters.
 
