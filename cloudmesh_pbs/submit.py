@@ -6,6 +6,8 @@ from sh import scp
 import docopt
 from docopt import docopt
 
+import metadata
+
     
 #Test connection
 #result = ssh("india.futuregrid.org", "pwd") #Runs one command at a time

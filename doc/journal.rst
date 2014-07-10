@@ -186,4 +186,7 @@ ________________________________________________________________________________
 	- Need to meet with Fugang and discuss Cloudmesh integration
 	- Worked on completing poster text - submitted it to be reviewed by Saliya and co.
 
-7/10
+7/10 - Continued developing poster text - placed it into ACM format
+	- Installed MongoDB and MongoEngine
+	- Began developing metadata.py file containing MongoDB document structure
+	- Need to read up on MongoDB commands - retrieving documents.
