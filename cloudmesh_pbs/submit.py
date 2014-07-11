@@ -15,7 +15,6 @@ import metadata
 #print "Success"
 
 
-
 def shell_command_pbs(arguments):
 	"""Connect to and submit scripts to FutureGrid computer clusters.
 
@@ -59,7 +58,10 @@ def shell_command_pbs(arguments):
 		email = arguments["<email>"]
 		jobname = arguments["<jname>"]
 		queuename = arguments["<qname>"]
-		executablePath = arguments["<executablePath>"]
+		if arguments{"<executablePath>"]:
+			executablePath = arguments["<executablePath>"]
+		else:
+			executablePath = ""
 		script = pbs.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
 		pbs.save_script(script, arguments["<scriptPath>"])
 		
@@ -203,12 +205,7 @@ class TwisterPBS(PBS):
 		      :param executablePath: path of an executable to be run on host"""
 
 		#Currently only creates Twister script which performs SWG and PWC
-<<<<<<< HEAD
-        twisterscript = 
-        """
-=======
 		twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath) + """
->>>>>>> 298524b7935832224c1a3604a506617dc6d3155c
 set_nodes()
 {
     > $TWISTER_HOME/bin/nodes
@@ -245,8 +242,6 @@ sleep 10
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
 
 """ % vars()
-
-        twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename, twisterscript)
 
 		return twistscript
 
