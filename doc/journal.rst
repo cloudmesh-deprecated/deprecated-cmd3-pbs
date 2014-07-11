@@ -3,26 +3,30 @@ BioInformatics Project under Dr. Geoffrey Fox, Saliya Ekenyake, Yang Ruan
 
 Week 1
 ____________________________________________________________________________________________________________________________________________
-6/4 - Project defined: Develop 3D tree mapping of 143K genetic code sequences using (improving upon) developed methods (DACIDR). Ultimately 		produce an image that appropriately displays relationship of genetic sequences to one another.
+6/4 
+	- Project defined: Develop 3D tree mapping of 143K genetic code sequences using (improving upon) developed methods (DACIDR). Ultimately 		produce an image that appropriately displays relationship of genetic sequences to one another.
 
-6/5 - Download and install Visual Studio (VS), Tortoise SVN (file backup software), attempt to build Pairwise Clustering Program in VS.
-	PWC tool (MDS tryout) Documentation: http://grids.ucs.indiana.edu/ptliupages/publications/Sequence%20Clustering%20Tools_draft_2.pdf
-	PWC tool is running.
-	Begun setting up accounts for Twister in order to run Smith-Waterman Algorithms and create Distance Matrix!
-	Added to FutureGrid Account
+6/5 
+	- Download and install Visual Studio (VS), Tortoise SVN (file backup software), attempt to build Pairwise Clustering Program in VS.
+	- PWC tool (MDS tryout) Documentation: http://grids.ucs.indiana.edu/ptliupages/publications/Sequence%20Clustering%20Tools_draft_2.pdf
+	- PWC tool is running.
+	- Begun setting up accounts for Twister in order to run Smith-Waterman Algorithms and create Distance Matrix!
+	- Added to FutureGrid Account
 
-6/6 - PWC tool finished running. I will submit output files to Box.
-	-Discussed new project: Developing interface that communicates with user and computer clusters. Interface would be user friendly and 				would communicate necessary information to clusters in order to return output to user.***
-	-Set up git project page.
-	-Accessed FutureGrid Account, and synced PWC files to my machine.
-	-New Project! Outline and email Saliya, Yang, Dr. Fox about new Project: Develop framework/web interface for deploying MDS job using 				Twister on IU clusters.
+6/6 
+	- PWC tool finished running. I will submit output files to Box.
+	- Discussed new project: Developing interface that communicates with user and computer clusters. Interface would be user friendly and 				would communicate necessary information to clusters in order to return output to user.***
+	- Set up git project page.
+	- Accessed FutureGrid Account, and synced PWC files to my machine.
+	- New Project! Outline and email Saliya, Yang, Dr. Fox about new Project: Develop framework/web interface for deploying MDS job using 				Twister on IU clusters.
 
 Week 2
 ____________________________________________________________________________________________________________________________________________
-6/9 - Finish downloading and setting up Twister Iterative MapReduce. See file TwisterPipelineSetup.txt for outline of Twister setup.
-	-Downloaded/Installed onto FutureGrid cluster: JAVA JDK, Apache ANT, Apache ActiveMQ Broker
-	-Managed to get Twister running
-	-Ran algorithm to create Distance Matrix
+6/9 
+	- Finish downloading and setting up Twister Iterative MapReduce. See file TwisterPipelineSetup.txt for outline of Twister setup.
+	- Downloaded/Installed onto FutureGrid cluster: JAVA JDK, Apache ANT, Apache ActiveMQ Broker
+	- Managed to get Twister running
+	- Ran algorithm to create Distance Matrix
 
 	TODO: Update java code in futureGrid, Familiarize self with arguments for running algorithms
 	Tomorrow: Work on MDS and create visualization! Sit with Saliya to work on other project component (web interface)
@@ -47,38 +51,44 @@ ________________________________________________________________________________
 
 		ASK ABOUT ARGUMENTS!!!
 
-6/10 - Continued to familiarize myself with Smith-Waterman code: How to submit jobs, what to expect as output.
-	-Experimented with accessing cluster, and using bash commands.
-	-Updated code from Yang to include mds scripts
-	-*Began working on portal framework. Working on back-end which will accept user input and submit jobs to clusters.
-	-Working on building script and connecting via ssh to computer cluster (futureGrid specifically for this instance.)
+6/10 
+	- Continued to familiarize myself with Smith-Waterman code: How to submit jobs, what to expect as output.
+	- Experimented with accessing cluster, and using bash commands.
+	- Updated code from Yang to include mds scripts
+	- *Began working on portal framework. Working on back-end which will accept user input and submit jobs to clusters.
+	- Working on building script and connecting via ssh to computer cluster (futureGrid specifically for this instance.)
 
-6/11 - Continued work.
+6/11 
+	- Continued work.
 	- Worked on portal framework - need to have Saliya review progress.
 	- NEED TO CONNECT VIA SSH TO CLUSTER - SETUP SSH-KEY
 	- Finished MDS on FutureGrid and reviewed resulting 3D graph in plotviz.
 	- Need to set up environment in Quarry in order to run Twister.
 
-6/12 - Finished setting up Twister/AMQ environments in Quarry
+6/12 
+	- Finished setting up Twister/AMQ environments in Quarry
 	- Met with Saliya and Yang to review progress. Will need to work with Yang to develop PBS script in Java
 	- Saliya said he would look at connecting via ssh using jsch in java.
 	- Waiting on nodes from Quarry....
 	- Continuing to develop protal framework! Goal: Access futuregrid, submit simple job.
 
-6/13 - Spent time working on protal framework - basic desgin and functionality...still need to establish ssh connection.
+6/13 
+	- Spent time working on protal framework - basic desgin and functionality...still need to establish ssh connection.
 	- Worked with Yang on writing PBS script that will be deployed by java portal. EDIT: Still need to work on PBS script (6/16)
 	- Met with mentors to discuss progress and upcoming goals
 	- Redefined project goals: design a simple, back-end, program in Python which will interface with Cloudmesh and submit PBS job scripts to 		FutureGrid and similar clusters. 
 
 Week 3
 ______________________________________________________________________________________________________________________________________
-6/16 - Set up python libraries (sh and docopts) as well as environment.
+6/16 
+	- Set up python libraries (sh and docopts) as well as environment.
 	- Began designing clusterLink.py: uses sh library to connect to grid via command line and submit a PBS script to be run on the cluster
 	- Began working on a test PBS script to be submitted to cluster.
 	- Need to successfully submit a script to FutureGrid and have it run.
 	- qsub command not found using shh from sh?
 
-6/17 - Edited .bashrc on india.futuregrid.org: set path to QSUB_HOME directory. This fixed "command not found" error. (http://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path)
+6/17 
+	- Edited .bashrc on india.futuregrid.org: set path to QSUB_HOME directory. This fixed "command not found" error. (http://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path)
 	- NEED TO: Ask about Quarry nodes.
 	- SCP resource: http://www.hypexr.org/linux_scp_help.php
 	- PBS resources: http://www.cerm.unifi.it/static/CLUSTER/cluster.html, https://www.msi.umn.edu/resources/job-submission-and-scheduling-pbs-scripts
@@ -91,7 +101,8 @@ ________________________________________________________________________________
 	- RUN MDS on QUARRY on 56k + 1k data
 
 	
-6/18 - Continued to work on PBS script
+6/18 
+	- Continued to work on PBS script
 	- Scripting guide: http://www.tldp.org/LDP/abs/html/ops.html
 	- http://www.linuxquestions.org/questions/programming-9/how-can-i-do-multithreading-in-shell-scripting-904135/
 	- stackoverflow.com
@@ -99,31 +110,36 @@ ________________________________________________________________________________
 	- Need to write function to edit amq.properties file
 	- Also work on parameterizing function so that these scripts can be dynamically created in Python!
 
-6/19 - Working on PBS script
+6/19 
+	- Working on PBS script
 	- Completed file modification functions in Bash script (twisterScript)
 	- Completed simple script to run Twister.
 	- Began debugging with Yang
 	- Goal: successfully run script remotely on FutureGrid.
 
-6/20 - Developed python function to dynamically create Twister script which will run SWG and PWC algorithms on given data
+6/20 
+	- Developed python function to dynamically create Twister script which will run SWG and PWC algorithms on given data
 	- Still have some development left to do on this program and on this script.
 	- Yang has received my script and will spend time looking over it and looking over his code so that it will run smoothly.
 	- NEXT WEEK - need to meet with Yang and go over script and over Quarry Jobs!!!!!
 
 Week 4
 ________________________________________________________________________________________________________________________________________
-6/23 - Continued working on clusterLink.py script and on developing dynamic PBS script creation
+6/23 
+	- Continued working on clusterLink.py script and on developing dynamic PBS script creation
 	- Met with Yang to go over twisterScript: adjusted environmental variables and script executed successfully!
 	- Met with Saliya to go over clusterLink.py progress
 	- Will work on file transfer method and status update method.
 	- Plan to meet on Wednesday (6/25) to go over integration of clusterLink.py with Cloudmesh
 
-6/24 - Finished get_status and transfer methods within clusterLink.py
+6/24 
+	- Finished get_status and transfer methods within clusterLink.py
 	- Need to test transfer method within clusterLink.py to ensure that remote files will be transferred.
 	- Plan to meet with Saliya, Fugang, and Yang to discuss next steps.
 	- Also, may need to touch base with Quarry administration about the node request.
 
-6/25 - Tested get_status and transfer methods
+6/25 
+	- Tested get_status and transfer methods
 	- Can successfully transfer remote files to cluster.
 	- Met with Yang, Saliya, and Fugang to discuss integration with Cloudmesh.
 	- Need to install cloudmesh and CMD3 in order to "inject" my code into the framework.
@@ -131,7 +147,8 @@ ________________________________________________________________________________
 
 Week 5
 _________________________________________________________________________________________________________________________________________
-6/30 - Attempted to install Cloudmesh onto Saliya's Linux-Box
+6/30 
+	- Attempted to install Cloudmesh onto Saliya's Linux-Box
 	- Determined that Ubuntu needed to be upgraded: Decided to look into another machine for install
 	- Will work tomorrow to set up new machine.
 	- May spend time developing clusterLink.py dynamic script creation
@@ -142,7 +159,8 @@ ________________________________________________________________________________
 	- http://forums.devshed.com/python-programming-11/python-variables-strings-29994.html
 	- docs.python.org
 
-7/1 - Obtained new machine
+7/1 
+	- Obtained new machine
 	- Installed Ubuntu 14.04 on machine
 	- Set up git and cloned cloudmesh repository
 	- Installed CloudMesh
@@ -151,17 +169,48 @@ ________________________________________________________________________________
 	- Still need to install CMD3 before being able to integrate submit.py
 	- Can ssh access computer from another machine.
 
-7/2 - Managed to run CMD3 in terminal
+7/2 
+	- Managed to run CMD3 in terminal
 	- Working on integrating submit.py with cmd3
 	- Gregor helped integrate submit.py into cmd3
 	- spent time refining, cleaning up, and documenting code
 	- need to set up quarry jobs
 	- also need to talk to Saliya about next steps for program
 
-7/3 - Set up SSH access to india on futuregrid from Ubuntu machine: check .bashrc
+7/3 
+	- Set up SSH access to india on futuregrid from Ubuntu machine: check .bashrc
 	- Was briefed on poster -NEED TO START
 	- Worked on submit.py generate_script() - added ability to run an executable
+	- Began integrating Celery management system into submit.py system.
 	- Manual for OpenPBS
 		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/openpbs_manual.pdf
 	- Examples
 		- http://bose.utmb.edu/Compu_Center/Cluster_users/PBS%20HOWTO/PBS_HOW_TO.html
+
+Week 6
+________________________________________________________________________________________________________________________________________
+7/7 
+	- Worked on installing Django and Celery for Python
+	- Spent time reading up on celery and its usage
+	- Worked with Yang to process test data
+	- Began processing new data set
+
+7/8 
+	- Focused time working on poster
+	- Continued processing new data
+	- Need to talk to Fugang about Cloudmesh Usage... Submit doesn't work in cm shell
+	- Need to request more Quarry nodes.
+
+7/9 
+	- Met with Saliya to discuss next steps
+	- Need to process 57K sequences once nodes are obtained on Quarry
+	- Need to set up MongoDB and MongoEngine - Develop history trace.
+	- Need to Adjust AMQ memory
+	- Need to meet with Fugang and discuss Cloudmesh integration
+	- Worked on completing poster text - submitted it to be reviewed by Saliya and co.
+
+7/10 
+	- Continued developing poster text - placed it into ACM format
+	- Installed MongoDB and MongoEngine
+	- Began developing metadata.py file containing MongoDB document structure
+	- Need to read up on MongoDB commands - retrieving documents.

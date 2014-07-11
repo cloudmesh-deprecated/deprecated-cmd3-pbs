@@ -28,6 +28,8 @@ Usage
 
 - Connecting to computer clusters requires that local machine has ssh keys set up with FutureGrid
 
+-** In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format.
+
 
 	Usage:
 		submit.py (-h | --help)
@@ -42,10 +44,10 @@ Usage
 		-c <parameters>	 Creates PBS script with given parameters and saves it to <scriptPath>
 		[-t]		 Creates a TwisterPBS script instead of a PBS script
 		
-		-f <filePath>	 transfers file directory or file at address to host
+		-f <filePath> transfers file directory or file at address to host
 		[-r]		 indicates that files are located on a remote machine
 
-		-u <jobid>	 Return the status of the given jobid
+		-u <jobid> Return the status of the given jobid
 
         Examples:
 		submit.py -h
