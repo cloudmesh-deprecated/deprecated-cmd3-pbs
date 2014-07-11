@@ -214,3 +214,8 @@ ________________________________________________________________________________
 	- Installed MongoDB and MongoEngine
 	- Began developing metadata.py file containing MongoDB document structure
 	- Need to read up on MongoDB commands - retrieving documents.
+7/11
+	- Continued working on history trace with MongoDB
+	- Began improving code: studying docopts and Mongo: how to edit existing docs within database
+	- Researched ActiveMQ and memory management
+	- Need to finish Mongo work in submit.py!!!!!

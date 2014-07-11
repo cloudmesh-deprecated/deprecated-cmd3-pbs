@@ -20,14 +20,14 @@ def shell_command_pbs(arguments):
 
 	Usage:
 		submit.py (-h | --help)
-		submit.py <host> <scriptPath> -s 
-	        submit.py <host> <scriptPath> [-s] [-t] -c <nodes> <ppn> <time> <email> <jobname> <queuename> <executablePath>
+		submit.py <host> <scriptPath> -s <email> <jobname> [<nodes>] [<ppn>] [<walltime>] [<queuename>]
+	        submit.py <host> <scriptPath> [-s] [-t] -c <email> <jobname> <nodes> <ppn> <walltime> <queuename> <executablePath>
 		submit.py <host> -u <jobid>
 		submit.py <host> -f <filePath> [-r]
 	
 	Options:
 		(-h --help)	 Displays this help message
-		-s <host>	 Submit given PBS script to given host
+		-s		 Submit given PBS script to given host
 		-c <parameters>	 Creates PBS script with given parameters and saves it to <scriptPath>
 		[-t]		 Creates a TwisterPBS script instead of a PBS script
 		
@@ -39,7 +39,7 @@ def shell_command_pbs(arguments):
         Examples:
 		submit.py -h
         	submit.py -s -t india.futuregrid.org ./myPBSScript 2 8 24:00:00 me@myemail.com job queue
-		submit.py -s india.futuregrid.org ./myPremadePBSScript
+		submit.py -s india.futuregrid.org ./myPremadePBSScript my@email.com job456
 		submit.py -f india.futuregrid.org ./myfiles
     """
 
@@ -50,25 +50,43 @@ def shell_command_pbs(arguments):
 	else:
 		pbs = PBS(arguments["<host>"])
 
-	if arguments["-c"]:
+	if arguments["-c"] or arguments["-s"]:
 		print "Started"
 		nodes = arguments["<nodes>"]
 		ppn = arguments["<ppn>"]
-		time = arguments["<time>"]
+		walltime = arguments["<walltime>"]
 		email = arguments["<email>"]
-		jobname = arguments["<jname>"]
-		queuename = arguments["<qname>"]
-		if arguments{"<executablePath>"]:
+		jobname = arguments["<jobname>"]
+		queuename = arguments["<queuename>"]
+
+	if arguments["-c"]:
+		if arguments["<executablePath>"]:
 			executablePath = arguments["<executablePath>"]
 		else:
 			executablePath = ""
-		script = pbs.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
+		script = pbs.generate_script(nodes, ppn, walltime, email, jobname, queuename, executablePath)
 		pbs.save_script(script, arguments["<scriptPath>"])
 		
 	if arguments["-s"]:
 		print "Started"
 		jobid = pbs.submit(arguments["<scriptPath>"])
 		print "Job ID: " + jobid
+
+		#CHECK IF USER IS EXISTING IN DATABASE!
+		if email not in User.objects:
+			user = User(email=email, submits=1)
+		else: #Update existing user
+			user = User.objects(id=email).first()
+			
+		job = Job(name=jobname, 
+			author=user, 
+			nodes=nodes,
+			ppn=ppn,
+			walltime=walltime,
+			queuename=queuename)
+
+		user.save()
+		job.save()
 
 	if arguments["-u"]:
 		print pbs.get_status(arguments["<jobid>"])
@@ -105,21 +123,21 @@ class PBS:
 		#Return an id...
 		return result
 
-	def generate_script(self, nodes, ppn, time, email, jobname, queuename, executablePath=""):
-		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
+	def generate_script(self, nodes, ppn, walltime, email, jobname, queuename, executablePath=""):
+		""".. function:: generate_script(nodes, ppn, walltime, email, jobname, queuename, executablePath)
 		     
 		      Generate a string representing a basic PBS script
 
 	              :param nodes: number of nodes desired on cluster
 	    	      :param ppn: number of processors per node
-	    	      :param time: time required for job: 'hh:mm:ss'
+	    	      :param walltime: time required for job: 'hh:mm:ss'
 	    	      :param email: email to send job progress info
 	    	      :param jobname: name of job
 	    	      :param queuename: name of queue on which to run job
 		      :param executablePath: path of executable file on machine which job will run"""
 
 		_script = """#PBS -k o
-#PBS -l nodes %(nodes)s:ppn=%(ppn)s, walltime=%(time)s
+#PBS -l nodes %(nodes)s:ppn=%(ppn)s, walltime=%(walltime)s
 #PBS -M %(email)s
 #PBS -m abe
 #PBS -N %(jobname)s
@@ -156,7 +174,7 @@ class PBS:
 		return result
 
 	def transfer(self, filePath, remote=False):
-		""".. function:: transfer(files, remote)
+		""".. function:: transfer(files, remotewall)
 
 		      Transfer files, local or remote, to host specified on command line
 
@@ -191,21 +209,21 @@ class PBS:
 
 class TwisterPBS(PBS):
 
-	def generate_script(self, nodes, ppn, time, email, jobname, queuename, executablePath=""):
-		""".. function:: generate_script(nodes, ppn, time, email, jobname, queuename, executablePath)
+	def generate_script(self, nodes, ppn, walltime, email, jobname, queuename, executablePath=""):
+		""".. function:: generate_script(nodes, ppn, walltime, email, jobname, queuename, executablePath)
 
 		      See PBS.generate_script(): Creates a twister specific PBS script string
 			
 		      :param nodes: nodes to use on cluster
 		      :param ppn: processors to use per node
-		      :param time: time required for job: 'hh:mm:ss'
+		      :param walltime: time required for job: 'hh:mm:ss'
 		      :param email: email to send job progress info
 		      :param jobname: name of job
 		      :param queuename: name of queue on which to run job
 		      :param executablePath: path of an executable to be run on host"""
 
 		#Currently only creates Twister script which performs SWG and PWC
-		twistscript = super.generate_script(nodes, ppn, time, email, jobname, queuename, executablePath) + """
+		twistscript = super.generate_script(nodes, ppn, walltime, email, jobname, queuename, executablePath="") + """
 set_nodes()
 {
     > $TWISTER_HOME/bin/nodes
@@ -240,6 +258,8 @@ $TWISTER_HOME/bin/start_twister.sh &> ~/twister.out &
 sleep 10
 
 # NOW, RUN FUNCTIONS TO PROCESS DATA!
+
+%(executablePath)s
 
 """ % vars()
 

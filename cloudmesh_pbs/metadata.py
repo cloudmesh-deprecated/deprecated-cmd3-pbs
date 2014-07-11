@@ -18,11 +18,12 @@ class Comment(EmbeddedDocument):
 
 class User(Document):
 	email = StringField(required=True, primary_key=True)
+	submits = IntField(min_value=0)
 
 	meta = {'allow_inheritance':True}
 
 class Job(Document):
-	name = StringField(required=True, primary_key=True)
+	name = StringField(required=True)
 	author = ReferenceField(User)
 
 	nodes = StringField(max_length=10)
