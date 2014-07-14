@@ -112,7 +112,7 @@ RUNNING Smith-Waterman
 
 	THis generates pid_ as well
 	
-	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] [output_map_file] [aligner type] [score matrix type] [sequence type]
+	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] [local temp file] [output_map_file] [aligner type] [score matrix type] [sequence type]
 	
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ 123 SWG edn RNA
 	
@@ -129,6 +129,8 @@ RUNNING Smith-Waterman
 		gene_block_prefix = prefix before file name (same as from pwaFileSplitter)
 		
 		tmp_output_prefix = prefix for output files (used in run_dasmacof_cg_mem.sh)
+		
+		Local temporary storage file (soon to be removed as an argument)
 		
 		aligner type = SWG or NW
 		
