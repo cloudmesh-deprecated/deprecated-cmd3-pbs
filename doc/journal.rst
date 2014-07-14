@@ -219,3 +219,15 @@ ________________________________________________________________________________
 	- Began improving code: studying docopts and Mongo: how to edit existing docs within database
 	- Researched ActiveMQ and memory management
 	- Need to finish Mongo work in submit.py!!!!!
+
+Week 7
+_________________________________________________________________________________________________________________________________________
+7/12
+	- Adjusted configuration files for ActiveMQ
+	- Continued processing 57K sequences
+	- Continued working on developing history trace with Mongo
+		- Completed definition and storage of users/jobs
+		- Need to def function to query database and obtain history
+			- get_jobs(user) function
+			- get_job(jobname) function
+			- get_user(email) function

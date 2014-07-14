@@ -73,10 +73,13 @@ def shell_command_pbs(arguments):
 		print "Job ID: " + jobid
 
 		#CHECK IF USER IS EXISTING IN DATABASE!
-		if email not in User.objects:
-			user = User(email=email, submits=1)
+		#Database is connected to within metadata.py
+		if User.objects.with_id(email): #Update existing user
+			user = User.objects.with_id(email)
+			user.submits += 1
+			
 		else: #Update existing user
-			user = User.objects(id=email).first()
+			user = User(email=email, submits=1)
 			
 		job = Job(name=jobname, 
 			author=user, 

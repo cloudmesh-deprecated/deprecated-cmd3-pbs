@@ -7,7 +7,7 @@
 
 from mongoengine import *
 
-connect('submissions') #'submissions' is name of MongoDB database
+connect('submissions') #'submissions' is name of MongoDB database storing users and jobs
 
 
 class Comment(EmbeddedDocument):
