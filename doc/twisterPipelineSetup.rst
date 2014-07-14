@@ -53,15 +53,6 @@ are the key components.
 	- AMQ_HOME (check .bashrc file to see if environmental
           variable is AMQ_HOME or ACTIVEMQ_HOME if it already exists)
 
-- Set up environmental variables in .bashrc so that you don't have to do it 
-every single session.
-	- TWISTER_HOME
-	- ANT_HOME
-	- JAVA_HOME
-	- AMQ_HOME (check .bashrc file to see if environmental variable is 
-	AMQ_HOME or ACTIVEMQ_HOME if it already exists)
-
-
 - Optional: Download JAVA JDK in order to have original JDK as a
   backup.
 
