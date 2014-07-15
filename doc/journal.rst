@@ -222,7 +222,7 @@ ________________________________________________________________________________
 
 Week 7
 _________________________________________________________________________________________________________________________________________
-7/12
+7/14
 	- Adjusted configuration files for ActiveMQ
 	- Continued processing 57K sequences
 	- Continued working on developing history trace with Mongo
@@ -231,3 +231,13 @@ ________________________________________________________________________________
 			- get_jobs(user) function
 			- get_job(jobname) function
 			- get_user(email) function
+			
+7/15
+	- Continued working on poster: Need to refine text and place graphics
+		- Met with Khaliq and Saliya to obtain information
+		- Submitted for further review
+	- Tried to process 57K sequences: continued running into memory errors!
+		- Adjusted memory requirements in config files - will try again.
+	
+	
+	
