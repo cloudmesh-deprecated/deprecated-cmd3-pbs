@@ -156,9 +156,7 @@ FIRST RUN RANDOM WEIGHTS
 	randomWeights.sh [1. output weighted matrix] [2. row] [3. col]
 	[4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
 
-	randomWeights.sh [1. output weighted matrix] [2. row] [3. col] 
-		[4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
-
+	randomWeights.sh [1. output weighted matrix] [2. row] [3. col] [4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
 
 - 1. where output weight matrix directory will be.
 - 2. number of sequences
@@ -172,17 +170,7 @@ NEXT, SPLIT WEIGHTS
 - In TWISTER_HOME/samples/dacidr
 - This splits the weight matrix file
 
-
-	mdsFileSplit.sh [1. Data File ] [2. Temporary directory to
-			split data ] [3. Temp file prefix ] [4. Output
-			IDs file ] [5. Num map tasks ] [6. row size ]
-			[7. column size] [8. Type of input value
-			format (0: short; 1: double)]
-
-	mdsFileSplit.sh [1. Data File ] [2. Temporary directory to split data ]
-			[3. Temp file prefix ] [4. Output IDs file ] 
-			[5. Num map tasks ] [6. row size ] [7. column size] 
-			[8. Type of input value format (0: short; 1: double)]
+	mdsFileSplit.sh [1. Data File ] [2. Temporary directory to split data ]	[3. Temp file prefix ] [4. Output IDs file ] [5. Num map tasks ] [6. row size ] [7. column size] [8. Type of input value format (0: short; 1: double)]
 
 
 1. output weight file from randomweights.sh
@@ -199,29 +187,7 @@ NEXT, SPLIT WEIGHTS
 - mds scales data points.
 - resulting files are in a specified directory.
 
-
-	run_dasmacof_cg_mem.sh [1. Num map tasks ] [2. Input Folder]
-				[3. Input File Prefix] [4. Input
-				Weight Prefix] [5. IDs File ]
-				[6. Label Data File ] [7. Output File
-				] [8. Threshold value ] [9. The Target
-				Dimension ] [10. Cooling parameter
-				(alpha) ] [11. Input Data Size]
-				[12. Final Weight Prefix] [13. CG
-				iteration num] [14. CG Error
-				Threshold]
-
-	run_dasmacof_cg_mem.sh [1. Num map tasks ] [2. Input Folder] 
-				[3. Input File Prefix] 
-				[4. Input Weight Prefix] [5. IDs File ] 
-				[6. Label Data File ] [7. Output File ] 
-				[8. Threshold value ] 
-				[9. The Target Dimension ] 
-				[10. Cooling parameter (alpha) ] 
-				[11. Input Data Size] 
-				[12. Final Weight Prefix] 
-				[13. CG iteration num] 
-				[14. CG Error Threshold]
+	run_dasmacof_cg_mem.sh [1. Num map tasks ] [2. Input Folder] [3. Input File Prefix] [4. Input Weight Prefix] [5. IDs File ] [6. Label Data File ] [7. Output File ] [8. Threshold value ] [9. The Target Dimension ] [10. Cooling parameter (alpha) ] [11. Input Data Size] [12. Final Weight Prefix] [13. CG iteration num] [14. CG Error Threshold]
 
 
 - 1. The number of cores running job (nodes * ppn)
