@@ -152,10 +152,6 @@ FIRST RUN RANDOM WEIGHTS
 - In Twister_HOME directory, go to samples/dacidr
 - Weights indicate significance of certain data points
 
-
-	randomWeights.sh [1. output weighted matrix] [2. row] [3. col]
-	[4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
-
 	randomWeights.sh [1. output weighted matrix] [2. row] [3. col] [4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
 
 - 1. where output weight matrix directory will be.
