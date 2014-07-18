@@ -5,6 +5,7 @@
 #http://docs.mongoengine.org/en/latest/tutorial.html
 #http://docs.mongodb.org/manual/tutorial/getting-started/
 
+import datetime
 from mongoengine import *
 
 connect('submissions') #'submissions' is name of MongoDB database storing users and jobs
@@ -24,6 +25,8 @@ class User(Document):
 
 class Job(Document):
 	name = StringField(required=True)
+	jobid = StringField(max_length=20)
+	timeOfSubmit = DateTimeField(default=datetime.datetime.now())
 	author = ReferenceField(User)
 
 	nodes = StringField(max_length=10)

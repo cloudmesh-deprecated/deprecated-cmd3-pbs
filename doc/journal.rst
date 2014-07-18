@@ -238,6 +238,21 @@ ________________________________________________________________________________
 		- Submitted for further review
 	- Tried to process 57K sequences: continued running into memory errors!
 		- Adjusted memory requirements in config files - will try again.
+
+7/16
+	- Presented progress at IUPUI to fellow researchers
+	- Attempted to run 57K sequences once more without any avail
+	
+7/17
+	- Managed to begin processing 57K sequences with help of Yang
+	- Began working on Career Portfolio assignment (for Seminar)
+	- Further altered poster - DUE Tuesday
+
+7/18
+	- Continued to process 57K data
+	- Worked on submit.py history trace and MongoDB access
+	- Edited poster and submitted for review by mentors
+	- Worked on Documentation of project.
 	
 	
 	

@@ -24,6 +24,7 @@ def shell_command_pbs(arguments):
 	        submit.py <host> <scriptPath> [-s] [-t] -c <email> <jobname> <nodes> <ppn> <walltime> <queuename> <executablePath>
 		submit.py <host> -u <jobid>
 		submit.py <host> -f <filePath> [-r]
+		submit.py -i <email>
 	
 	Options:
 		(-h --help)	 Displays this help message
@@ -34,7 +35,8 @@ def shell_command_pbs(arguments):
 		-f <filePath>	 transfers file directory or file at address to host
 		[-r]		 indicates that files are located on a remote machine
 
-		-u <jobid>	 Return the status of the given jobid
+		-u <jobid>	 Return the status of the given jobid or jobname
+		-i <email>	 Return history of user with given email
 
         Examples:
 		submit.py -h
@@ -83,6 +85,7 @@ def shell_command_pbs(arguments):
 			
 		job = Job(name=jobname, 
 			author=user, 
+			jobid=jobid,
 			nodes=nodes,
 			ppn=ppn,
 			walltime=walltime,
@@ -98,6 +101,9 @@ def shell_command_pbs(arguments):
 		pbs.transfer(arguments["<filePath>"], remote=True)
 	elif arguments["-f"]:
 		pbs.transfer(arguments["<filePath>"], remote=False)
+
+	if arguments["-i"]:
+		print pbs.get_user(arguments["<email>"])
 
 	print "Complete"
     	
@@ -171,10 +177,55 @@ class PBS:
 
 		      Return the current status of the job referenced by the given jobid
 
-		      :param jobid: id of job to check on host"""
+		      :param jobid: id of job to check on host or job name within MongoDB"""
 
-		result = ssh(self.host, "checkjob", jobid)
+		if Job.objects.with_id(jobid):
+			job = Job.objects.with_id(jobid)
+			result = "\nJob: " + job.name +
+				"\nAuthor: " + job.author +
+				"\n\nNodes: " + job.nodes +
+				"\nPPN: " + job.ppn +
+				"\nWalltime: " + job.walltime +
+				"\nQueue name: " + job.queuename
+		else:
+			result = ssh(self.host, "checkjob", jobid)
+		
 		return result
+
+	def get_user(self, email):
+		""".. function:: get_user(email)
+		      
+		      Return string containing user info and jobs submitted by user
+
+		      :param email: email of user"""
+
+		if User.objects.with_id(email):
+			user = User.objects.with_id(email)
+			jobs = self.get_jobs(user)
+			result = "User: " + email +
+				 "\nSubmissions: " + str(user.submits) +
+				 "\nJobs: "
+
+			for job in jobs:
+				result += "\nID: " + job
+
+			return result
+		
+
+	def get_jobs(self, email):
+		""".. function:: get_jobs(user)
+		      
+		      Return list of submitted jobs by user
+
+		      :param user: user object (metadata.py) of user who submitted job"""
+
+		jobs = []
+		for job in Job.objects(author=user):
+			jobs.append(job.jobid)
+			
+		return jobs
+
+		
 
 	def transfer(self, filePath, remote=False):
 		""".. function:: transfer(files, remotewall)
