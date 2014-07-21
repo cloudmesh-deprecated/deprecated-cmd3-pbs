@@ -254,5 +254,10 @@ ________________________________________________________________________________
 	- Edited poster and submitted for review by mentors
 	- Worked on Documentation of project.
 	
-	
+Week 8
+_______________________________________________________________________________________________________________________________________
+7/21
+	- Completed Paper and Poster -uploaded to Cloudmesh/REU repository
+	- Attempted to finish processing 57K sequences
+	- Documented progress on submit.py	
 	

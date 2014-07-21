@@ -181,12 +181,12 @@ class PBS:
 
 		if Job.objects.with_id(jobid):
 			job = Job.objects.with_id(jobid)
-			result = "\nJob: " + job.name +
-				"\nAuthor: " + job.author +
-				"\n\nNodes: " + job.nodes +
-				"\nPPN: " + job.ppn +
-				"\nWalltime: " + job.walltime +
-				"\nQueue name: " + job.queuename
+			result = "\nJob: " + job.name 
+			+ "\nAuthor: " + job.author
+			+ "\n\nNodes: " + job.nodes
+			+ "\nPPN: " + job.ppn 
+			+ "\nWalltime: " + job.walltime 
+			+ "\nQueue name: " + job.queuename
 		else:
 			result = ssh(self.host, "checkjob", jobid)
 		
@@ -202,9 +202,9 @@ class PBS:
 		if User.objects.with_id(email):
 			user = User.objects.with_id(email)
 			jobs = self.get_jobs(user)
-			result = "User: " + email +
-				 "\nSubmissions: " + str(user.submits) +
-				 "\nJobs: "
+			result = "User: " + email
+			+ "\nSubmissions: " + str(user.submits)
+			+ "\nJobs: "
 
 			for job in jobs:
 				result += "\nID: " + job

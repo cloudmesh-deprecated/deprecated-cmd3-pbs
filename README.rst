@@ -7,6 +7,10 @@ program is titled submit.py (within cloudmesh_pbs)
 Currently, the computer cluster in use is India on FutureGrid.
 
 
+Further Project Information: 
+
+	https://github.com/cloudmesh/reu/blob/master/doc/source/projects/bioinformatics.rst
+
 Setting up submit.py within environment
 ================================================
 
@@ -39,6 +43,10 @@ Usage
 
 - Connecting to computer clusters requires that local machine has ssh
   keys set up with FutureGrid
+
+- A history trace has been implemented using MongoDB and MongoEngine
+ The structure of objects within the database is found in metadata.py
+ 
 
 -** In order to transfer files to host, submit jobs, etc, you must
  have a working ssh connection! Editing submit.py methods may be
@@ -89,8 +97,18 @@ Usage
 			- transfers local file or directory ./myfiles
                           to india.futuregrid.org home directory
 
+		submit.py -i me@myemail.com
+			- returns history of user with given email
+
 
 Progress
 ==================================================
 Look at doc/journal.rst
 
+Future Work
+==================================================
+- Create a daemon to monitor existing jobs and return job progress
+
+- This daemon would also return output once jobs are completed
+
+- Integrate this tool into Cloudmesh GUI
