@@ -260,4 +260,15 @@ ________________________________________________________________________________
 	- Completed Paper and Poster -uploaded to Cloudmesh/REU repository
 	- Attempted to finish processing 57K sequences
 	- Documented progress on submit.py	
+
+7/22
+	- Began MDS on 57K sequences!
+	- Successfully ran MDS on 57K sequences!!!
+	- Finished and submitted poster
+	- Documented progress
+	- Worked on example_script and twisterScript documentation
+	- Need to edit twisterScript
+	- Need to finish documentation
+	- Need to meet with Fugang about cloudmesh shell
+
 	

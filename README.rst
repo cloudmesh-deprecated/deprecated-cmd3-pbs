@@ -101,6 +101,93 @@ Usage
 			- returns history of user with given email
 
 
+Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- submit.py primarily functions to submit and run PBS scripts on computer clusters
+- In the doc directory exist "example_script" and "twisterScript"
+
+example_script
+==================================================
+
+Use this script as a basis for putting together your own script.
+
+::
+	#
+	#
+	#PBS -k o
+	#PBS -l nodes=<numberOfNodes>:ppn=<numberOfProcessorsPerNode>,walltime=<hh:mm:ss>
+	#PBS -M <email>
+	#PBS -m abe
+	#PBS -N <jobname>
+	#PBS -j oe
+	#PBS -q <queuename>
+	#
+	#
+
+	echo "Started..."
+
+	#Run any commands or Executables here
+	
+	<Command>
+	<Executable>
+	
+	sleep 10
+	
+	echo "Done"
+
+Parameters
+________________________________________________________________
+	<numberOfNodes>: 		The number of nodes desired for the job
+
+	<numberOfProcessorsPerNode>: 	The number of processors per node desired (typically 8)
+
+	<email>:			The email to which job success/error information is sent
+
+	<jobname>:			Name of the job to be run
+
+	<queuename>:			Name of the queue on which to run this job
+
+	<Command>:			Command to be run by script (eg. echo "Blah blah blah")
+					
+	<Executable>:			Executable file to be run by script
+					This file should be on the same machine that will run this script
+
+Notes
+_________________________________________________________________
+	Any number of <Command> and/or <Executable arguments may be given
+
+	Usually, it is a good idea to run "sleep <x>" for x number of seconds between commands/executables
+
+	In order to run a command or executable in the background use "&":
+
+	::
+		#Script Body
+		
+		Command1 arg1 arg2 arg3 &
+
+		wait
+
+		#Remainder of Script
+
+	"wait" is sometimes used to prevent script from "hanging" (see http://tldp.org/LDP/abs/html/x9644.html#WAITHANG)
+
+	A complete script may be submit and run on a remote host using submit.py's -s option
+
+
+Check out these links which explain qsub options (-k, -l, etc):
+________________________________________________________________
+
+	- http://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-QSUB-Options-in-PBS-Scripts-or-in-the-QSUB-Command-Line_175.html
+
+	- http://rcc.its.psu.edu/user_guides/system_utilities/pbs/
+
+twisterScript
+==================================================
+**Regard twisterScript in doc directory/**
+
+ - This script sets up the Twister and ActiveMQ environments 
+	as long as their classpaths are loaded on the machine this script is run on
+
 Progress
 ==================================================
 Look at doc/journal.rst
