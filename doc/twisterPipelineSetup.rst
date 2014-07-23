@@ -22,7 +22,7 @@ are the key components.
 	- Use ActiveMQ broker instead (likely have to install)
 	- Any steps involving NaradaBrokering, skip or do with AMQ.
 
-	- **IP address needs to be changed in appropriate files every time this is run from new nodes/computer: 
+	- **IP address needs to be changed in appropriate files every time this is run from new nodes/computer:**
 
 		TWISTER/bin/nodes
 		
