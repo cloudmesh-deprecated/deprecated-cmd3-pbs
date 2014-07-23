@@ -107,27 +107,49 @@ example_script
 
 Use this script as a basis for putting together your own script.
 
+::
 
+	#
+	#
+	#PBS -k o
+	#PBS -l nodes=<numberOfNodes>:ppn=<numberOfProcessorsPerNode>,walltime=<hh:mm:ss>
+	#PBS -M <email>
+	#PBS -m abe
+	#PBS -N <jobname>
+	#PBS -j oe
+	#PBS -q <queuename>
+	#
+	#
+
+	echo "Started..."
+
+	#Run any commands or Executables here
+	
+	<Command>
+	<Executable>
+	
+	sleep 10
+	
+	echo "Done"
 
 Parameters
+_________________________________________________________
+<numberOfNodes>: 			The number of nodes desired for the job
 
-<numberOfNodes>: 		The number of nodes desired for the job
+<numberOfProcessorsPerNode>: 		The number of processors per node desired (typically 8)
 
-<numberOfProcessorsPerNode>: 	The number of processors per node desired (typically 8)
+<email>:				The email to which job success/error information is sent
 
-<email>:			The email to which job success/error information is sent
+<jobname>:				Name of the job to be run
 
-<jobname>:			Name of the job to be run
+<queuename>:				Name of the queue on which to run this job
 
-<queuename>:			Name of the queue on which to run this job
-
-<Command>:			Command to be run by script (eg. echo "Blah blah blah")
+<Command>:				Command to be run by script (eg. echo "Blah blah blah")
 				
-<Executable>:			Executable file to be run by script
-				This file should be on the same machine that will run this script
+<Executable>:				Executable file to be run by script. This file should be on the same machine that will run this script
 
 Notes
-
+______________________________________________________________
 Any number of <Command> and/or <Executable arguments may be given
 
 Usually, it is a good idea to run "sleep <x>" for x number of seconds between commands/executables
