@@ -35,8 +35,8 @@ def shell_command_pbs(arguments):
 		-f <filePath>	 transfers file directory or file at address to host
 		[-r]		 indicates that files are located on a remote machine
 
-		-u <jobid>	 Return the status of the given jobid or jobname
-		-i <email>	 Return history of user with given email
+		-i <jobid>	 Return the status of the given jobid or jobname
+		-u <email>	 Return history of user with given email
 
         Examples:
 		submit.py -h
@@ -103,6 +103,9 @@ def shell_command_pbs(arguments):
 		pbs.transfer(arguments["<filePath>"], remote=False)
 
 	if arguments["-i"]:
+		print pbs.get_status(arguments["<jobid>"])
+
+	if arguments["-u"]:
 		print pbs.get_user(arguments["<email>"])
 
 	print "Complete"
