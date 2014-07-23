@@ -48,8 +48,11 @@ Usage
  The structure of objects within the database is found in metadata.py
  
 
-**In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format.**
+**In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required.**
 
+**Enter host with user:password@host format on command line before editing code.**
+
+See PBS.submit function in submit.py if encountering issues with a working ssh connection.
 
 ::
 
