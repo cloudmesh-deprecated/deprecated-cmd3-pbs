@@ -61,22 +61,12 @@ NOTES:
 RUNNING Smith-Waterman
 ----------------------------------------------------------------------
 
-- In twister directory, go to samples/dacidr/
-- pwaFileSpliter.sh function splits sequence file into smaller partitions (easier to process)
-
-------RUNNING Smith-Waterman--------------------------------------------------
-
-- In twister directory, go to samples/dacidr/
-- pwaFileSpliter.sh function splits sequence file into smaller partitions 
-(easier to process)
-
-- pwaMul.sh function performs distance matrix calculations
-- resulting files are in directory specified when prior functions are
-  run.
-
-
 pwaFileSpliter.sh
 ========================================================================
+- In twister directory, go to samples/dacidr/
+
+- pwaFileSpliter.sh function splits sequence file into smaller partitions (easier to process)
+
 args:  [gene_seq_file] [sequence_count] [num_of_partitions] [out_dir] [gene_block_prefix] [output_idx file] [Alphabet]
 
 	num_of_partitions = number of cores....?  Partitions gene sequence files into more manageable sized units
@@ -97,9 +87,13 @@ Example:
 
 pwaMul.sh
 =========================================================================
+- In twister directory, go to samples/dacidr/
+- pwaMul.sh function performs distance matrix calculations
+- resulting files are in directory specified when prior functions are
+  run.
 	This generates pid_ files
 	
-args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] [local temp file] [output_map_file] [aligner type] [score matrix type] [sequence type]
+args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] [aligner type] [score matrix type] [sequence type]
 	
 	num_of_map_tasks = number of cores (nodes*ppn) Don't include head node
 	
@@ -115,8 +109,6 @@ args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partiti
 	
 	tmp_output_prefix = prefix for output files (used in run_dasmacof_cg_mem.sh)
 	
-	Local temporary storage file (soon to be removed as an argument)
-	
 	aligner type = SWG or NW
 	
 	score matrix type = edn or blo
@@ -125,7 +117,7 @@ args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partiti
 
 Example:
 
-	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ 123 SWG edn RNA
+	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ SWG edn RNA
 
 
 RUNNING MDS
