@@ -1,0 +1,31 @@
+#See REAMDE.rst for info
+#
+#PBS -k o
+#PBS -l nodes=<numberOfNodes>:ppn=<numberOfProcessorsPerNode>,walltime=<hh:mm:ss>
+#PBS -M <email>
+#PBS -m abe
+#PBS -N <jobname>
+#PBS -j oe
+#PBS -q long
+#
+#
+
+echo "Started....."
+
+<Command>
+
+sleep 10
+
+<Executable>
+
+sleep 10
+
+<Command2>
+
+sleep 10
+
+<Executable2>
+
+sleep 10 
+
+echo "Done."
