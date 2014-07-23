@@ -44,9 +44,10 @@ ________________________________________________________________________________
 		
 
 
-	[lsaggu@i97 dacidr]$ ./pwaMul.sh
+	**pwaMul.sh**
 	THis generates pid_ as well
-	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix] 		[output_map_file] [aligner type][score matrix type] [sequence type]
+	args:  [num_of_map_tasks] [num_of_reduce_tasks] [sequence_count] [num_of_partitions] [data_dir] [gene_block_prefix] [tmp_output_prefix]	[output_map_file] [aligner type][score matrix type] [sequence type]
+
 	[lsaggu@i97 dacidr]$ ./pwaMul.sh 16 4 4640 16 ~/data/test/16/ input_ swg_ 123 SWG edn RNA
 
 		ASK ABOUT ARGUMENTS!!!
@@ -274,7 +275,10 @@ ________________________________________________________________________________
 7/23
 	- Continued documentation of project
 		- Defined example_script and twisterScript
-
+	- Spoke to Fugang about Cloudmesh
+		- The submit.py function is "pbs" in the Cloudmesh shell
+		- The function apears to work
+	- Need to meet with Saliya to discuss wrap up.
 
 
 	
