@@ -132,7 +132,7 @@ Random Weights
 
 	randomWeights.sh [1. output weighted matrix] [2. row] [3. col] [4. percentage] [5. symmetric (0:no; 1:yes)] [6. weight value]
 
-- 1. where output weight matrix directory will be.
+- 1. where output weight matrix will be output.
 - 2. number of sequences
 - 3. number of sequences
 - 4. percentage of points to be given weight of 0 (typically 0)
