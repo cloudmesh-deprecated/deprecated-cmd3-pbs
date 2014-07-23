@@ -2,12 +2,12 @@
 #
 #
 #PBS -k o
-#PBS -l nodes=2:ppn=8,walltime=24:00:00
-#PBS -M lsaggu@indiana.edu
+#PBS -l nodes=<numberOfNodes>:ppn=<numberOfProcessersPerNode>,walltime=<hh:mm:ss>
+#PBS -M <email>
 #PBS -m abe
-#PBS -N mpipwc
+#PBS -N <jobname>
 #PBS -j oe
-#PBS -q long
+#PBS -q <queuename>
 #
 #
 
@@ -54,11 +54,26 @@ $TWISTER_HOME/bin/start_twister.sh &> ~/twister.out &
 
 sleep 10
 
+# ** The following arguments are examples. See twisterPipelineSetup.rst for instructions on using these executables. **
+
+# SMITH-WATERMAN
+
 $TWISTER_HOME/samples/dacidr/pwaFileSpliter.sh ~/data/test/4640_fasta.txt 4640 16 ~/data/test/16/ input_ ~/data/test/4640_16.idx RNA
+sleep 10
 
 $TWISTER_HOME/samples/dacidr/pwaMul.sh 16 4 4640 16 ~/data/test/16 input_ swg_ 123 SWG edn RNA
+sleep10
 
+# MDS
+
+$TWISTER_HOME/samples/dacidr/randomweights.sh ~/data/test/16/weight_matrix 4640 4640 0 0 1
+sleep10
+
+$TWISTER_HOME/samples/dacidr/mdsFileSplit.sh ~/data/test/16/weight_matrix ~/data/test/16/ weights_all1_ ~/data/test/4640_16.idx 16 4640 4640 0
+sleep10
+
+$TWISTER_HOME/samples/dacidr/run_dasmacof_cg_mem.sh 16 ~/data/test/16 swg_pid_ weights_all1_ ~/data/test/4640_16.idx NoLabel ~/data/test/4640_result.txt .000001 3 0.95 4640 weights_all1_ 20 1
 
 sleep 10
 
-$TWISTER_HOME/bin/kill_all_java_processes.sh lsaggu
+$TWISTER_HOME/bin/kill_all_java_processes.sh <username>
