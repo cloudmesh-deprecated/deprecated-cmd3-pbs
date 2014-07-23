@@ -22,16 +22,16 @@ are the key components.
 	- Use ActiveMQ broker instead (likely have to install)
 	- Any steps involving NaradaBrokering, skip or do with AMQ.
 
-	-**IP address needs to be changed in appropriate files every time this is run from new nodes/computer: 
+	- **IP address needs to be changed in appropriate files every time this is run from new nodes/computer: 
 
 		TWISTER/bin/nodes
 		
 		url in amq.properties in TWISTER/bin
 
 
-	-*Make sure other file locations are correct in files mentioned in the userguide above
+	- *Make sure other file locations are correct in files mentioned in the userguide above
 
-	-*Make sure other file locations are correct in files mentioned in the userguide above
+	- *Make sure other file locations are correct in files mentioned in the userguide above
 
 
 - Download ANT from Apache - Used to compile .jar files (JAVA)
