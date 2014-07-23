@@ -48,7 +48,7 @@ Usage
  The structure of objects within the database is found in metadata.py
  
 
-** In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format. **
+**In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format.**
 
 
 ::
@@ -138,6 +138,8 @@ _________________________________________________________
 
 <numberOfProcessorsPerNode>: 		The number of processors per node desired (typically 8)
 
+<hh:mm:ss>				The walltime or the time necessary for the job to run in hours:minutes:seconds
+
 <email>:				The email to which job success/error information is sent
 
 <jobname>:				Name of the job to be run
@@ -178,13 +180,29 @@ ____________________________________________________________________
 
 - http://rcc.its.psu.edu/user_guides/system_utilities/pbs/
 
+- **User guide to PBS:** http://scsb.utmb.edu/facilities/random/protocols/pbs-mit-user-guide.htm
 
 twisterScript
 ==================================================
-
 Regard twisterScript in doc directory
 
  - This script sets up the Twister and ActiveMQ environments as long as their classpaths are loaded on the machine this script is run on
+ - set_nodes() sets the nodes appropriately for twister to run.
+	- See http://scsb.utmb.edu/facilities/random/protocols/pbs-mit-user-guide.htm for info on PBS_NODEFILE
+ - set_amq() sets the headnode in the amq.properties file in the $TWISTER_HOME/bin/ directory
+
+After the nodes are set, the environment is started with lines 52 and 53
+
+The Twister Pipeline executable functions are then exemplified in lines 61, 64, 69, 72, and 75
+
+Each executable is seperated by a sleep command as suggested previously.
+
+Usage
+_________________________________________________
+**Adjust arguments for executable functions as necessary depending on existing data and file structures**
+
+**If only running specific executables, comment out others using '#' at the beginning of the line.**
+
 
 Progress
 ==================================================

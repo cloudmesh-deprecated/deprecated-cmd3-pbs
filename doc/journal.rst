@@ -271,4 +271,10 @@ ________________________________________________________________________________
 	- Need to finish documentation
 	- Need to meet with Fugang about cloudmesh shell
 
+7/23
+	- Continued documentation of project
+		- Defined example_script and twisterScript
+
+
+
 	
