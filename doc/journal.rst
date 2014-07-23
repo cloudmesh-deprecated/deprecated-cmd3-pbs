@@ -277,7 +277,7 @@ ________________________________________________________________________________
 		- Defined example_script and twisterScript
 	- Spoke to Fugang about Cloudmesh
 		- The submit.py function is "pbs" in the Cloudmesh shell
-		- The function apears to work
+		- The function appears to work
 	- Need to meet with Saliya to discuss wrap up.
 
 
