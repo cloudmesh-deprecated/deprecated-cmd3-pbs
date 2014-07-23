@@ -30,6 +30,10 @@ Running submit.py within environment
   python cloudmesh_pbs/submit.py
 
   cm
+  
+**Within Cloudmesh Shell, the command to run submit.py is "pbs"**
+
+Type "help pbs" in Cloudmesh Shell to view help text.
 
 Usage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
