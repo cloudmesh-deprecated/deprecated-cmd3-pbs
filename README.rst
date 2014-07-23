@@ -48,10 +48,7 @@ Usage
  The structure of objects within the database is found in metadata.py
  
 
--** In order to transfer files to host, submit jobs, etc, you must
- have a working ssh connection! Editing submit.py methods may be
- necessary if password is required or enter host with
- user:password@host format.
+** In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required or enter host with user:password@host format. **
 
 
 ::
@@ -100,7 +97,6 @@ Usage
 		submit.py -i me@myemail.com
 			- returns history of user with given email
 
-
 Scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - submit.py primarily functions to submit and run PBS scripts on computer clusters
@@ -111,82 +107,62 @@ example_script
 
 Use this script as a basis for putting together your own script.
 
-::
-	#
-	#
-	#PBS -k o
-	#PBS -l nodes=<numberOfNodes>:ppn=<numberOfProcessorsPerNode>,walltime=<hh:mm:ss>
-	#PBS -M <email>
-	#PBS -m abe
-	#PBS -N <jobname>
-	#PBS -j oe
-	#PBS -q <queuename>
-	#
-	#
 
-	echo "Started..."
-
-	#Run any commands or Executables here
-	
-	<Command>
-	<Executable>
-	
-	sleep 10
-	
-	echo "Done"
 
 Parameters
-________________________________________________________________
-	<numberOfNodes>: 		The number of nodes desired for the job
 
-	<numberOfProcessorsPerNode>: 	The number of processors per node desired (typically 8)
+<numberOfNodes>: 		The number of nodes desired for the job
 
-	<email>:			The email to which job success/error information is sent
+<numberOfProcessorsPerNode>: 	The number of processors per node desired (typically 8)
 
-	<jobname>:			Name of the job to be run
+<email>:			The email to which job success/error information is sent
 
-	<queuename>:			Name of the queue on which to run this job
+<jobname>:			Name of the job to be run
 
-	<Command>:			Command to be run by script (eg. echo "Blah blah blah")
-					
-	<Executable>:			Executable file to be run by script
-					This file should be on the same machine that will run this script
+<queuename>:			Name of the queue on which to run this job
+
+<Command>:			Command to be run by script (eg. echo "Blah blah blah")
+				
+<Executable>:			Executable file to be run by script
+				This file should be on the same machine that will run this script
 
 Notes
-_________________________________________________________________
-	Any number of <Command> and/or <Executable arguments may be given
 
-	Usually, it is a good idea to run "sleep <x>" for x number of seconds between commands/executables
+Any number of <Command> and/or <Executable arguments may be given
 
-	In order to run a command or executable in the background use "&":
+Usually, it is a good idea to run "sleep <x>" for x number of seconds between commands/executables
 
-	::
-		#Script Body
-		
-		Command1 arg1 arg2 arg3 &
+In order to run a command or executable in the background use "&":
 
-		wait
+::
 
-		#Remainder of Script
+	#Script Body
+	
+	Command1 arg1 arg2 arg3 &
 
-	"wait" is sometimes used to prevent script from "hanging" (see http://tldp.org/LDP/abs/html/x9644.html#WAITHANG)
+	wait
 
-	A complete script may be submit and run on a remote host using submit.py's -s option
+	#Remainder of Script
+
+"wait" is sometimes used to prevent script from "hanging" 
+(see http://tldp.org/LDP/abs/html/x9644.html#WAITHANG)
+
+A complete script may be submit and run on a remote host using submit.py's -s option
 
 
 Check out these links which explain qsub options (-k, -l, etc):
-________________________________________________________________
+____________________________________________________________________
+- http://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-QSUB-Options-in-PBS-Scripts-or-in-the-QSUB-Command-Line_175.html
 
-	- http://www.nas.nasa.gov/hecc/support/kb/Commonly-Used-QSUB-Options-in-PBS-Scripts-or-in-the-QSUB-Command-Line_175.html
+- http://rcc.its.psu.edu/user_guides/system_utilities/pbs/
 
-	- http://rcc.its.psu.edu/user_guides/system_utilities/pbs/
 
 twisterScript
 ==================================================
-**Regard twisterScript in doc directory/**
 
- - This script sets up the Twister and ActiveMQ environments 
-	as long as their classpaths are loaded on the machine this script is run on
+Regard twisterScript in doc directory
+
+ - This script sets up the Twister and ActiveMQ environments as long as their classpaths are loaded on the machine this script is run on
 
 Progress
 ==================================================
