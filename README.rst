@@ -13,6 +13,7 @@ Further Project Information:
 
 Setting up submit.py within Cloudmesh environment
 ================================================
+Make sure **Cloudmesh** and **CMD3** are installed.
 
 ::
 
