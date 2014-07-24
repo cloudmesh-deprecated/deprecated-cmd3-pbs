@@ -6,6 +6,8 @@ program is titled submit.py (within cloudmesh_pbs)
 
 Currently, the computer cluster in use is India on FutureGrid.
 
+Currently, this project has only been implemented on Linux systems.
+
 
 Further Project Information: 
 
