@@ -80,7 +80,8 @@ See PBS.submit function in submit.py if encountering issues with a working ssh c
                                  address to host
 		[-r]		 indicates that files are located on 
                                  a remote machine
-		-u <jobid>       Return the status of the given jobid
+		-i <jobid>       Return the status of the given jobid
+		-u <email>	 Retrun the history of the given user
 
         Examples:
 		submit.py -h
@@ -101,7 +102,7 @@ See PBS.submit function in submit.py if encountering issues with a working ssh c
 			- transfers local file or directory ./myfiles
                           to india.futuregrid.org home directory
 
-		submit.py -i me@myemail.com
+		submit.py -u me@myemail.com
 			- returns history of user with given email
 
 Scripts
