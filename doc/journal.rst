@@ -280,5 +280,7 @@ ________________________________________________________________________________
 		- The function appears to work
 	- Need to meet with Saliya to discuss wrap up.
 
-
-	
+7/24
+	- Finished wrapping up project
+	- Completed weekly reports.
+	- Met with Saliya to discuss final points	
