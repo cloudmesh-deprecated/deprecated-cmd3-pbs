@@ -11,7 +11,7 @@ Further Project Information:
 
 	https://github.com/cloudmesh/reu/blob/master/doc/source/projects/bioinformatics.rst
 
-Setting up submit.py within environment
+Setting up submit.py within Cloudmesh environment
 ================================================
 
 ::
@@ -20,7 +20,7 @@ Setting up submit.py within environment
 
   python setup.py install
 
-Running submit.py within environment
+Running submit.py within Cloudmesh environment
 ================================================
 
 ::
