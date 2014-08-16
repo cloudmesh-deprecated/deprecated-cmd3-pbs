@@ -39,26 +39,28 @@ Running submit.py within Cloudmesh environment
 
 Type "help pbs" in Cloudmesh Shell to view help text.
 
-Usage
+Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- The goal of submit.py is to submit PBS scripts to computer clusters
-  (currently on FutureGrid) and ultimately run these scripts on the
-  cluster.
+- submit PBS scripts to compute clusters
+  (currently on FutureGrid) and  run these scripts.
 
-- Being able to transfer files to a computer cluster is also a goal of
-  this program
+- transfer files to a computer cluster 
 
-- Connecting to computer clusters requires that local machine has ssh
-  keys set up with FutureGrid
+- use the users default ssh key
 
-- A history trace has been implemented using MongoDB and MongoEngine.
-  The structure of objects within the database is found in metadata.py
+- a history trace using MongoDB and MongoEngine.
+  (The structure of objects within the database is found in metadata.py)
  
 
-**In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required.**
+In order to transfer files to host, submit jobs, etc, you must have a working ssh 
+connection. Editing submit.py methods may be necessary if password is required.
 
-**Enter host with user:password@host format on command line before editing code.**
+** note this is a bug in the documentation, and not part of the design no password msut be entered. **
+
+Enter host with user:password@host format on command line before editing code.
+
+also this needs to be replaced with a configuration file.
 
 See PBS.submit function in submit.py if encountering issues with a working ssh connection.
 
