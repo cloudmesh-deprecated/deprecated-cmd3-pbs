@@ -52,8 +52,8 @@ Usage
 - Connecting to computer clusters requires that local machine has ssh
   keys set up with FutureGrid
 
-- A history trace has been implemented using MongoDB and MongoEngine
- The structure of objects within the database is found in metadata.py
+- A history trace has been implemented using MongoDB and MongoEngine.
+  The structure of objects within the database is found in metadata.py
  
 
 **In order to transfer files to host, submit jobs, etc, you must have a working ssh connection! Editing submit.py methods may be necessary if password is required.**
