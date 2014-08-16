@@ -1,17 +1,18 @@
 cloudmesh_pbs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Python program which submits PBS jobs to computer clusters. This
-program is titled submit.py (within cloudmesh_pbs)
+Python program which submits PBS jobs to compute clusters.  The program is named 
 
-Currently, the computer cluster in use is India on FutureGrid.
+::
 
-Currently, this project has only been implemented on Linux systems.
+  submit.py
+
+The compute cluster india is used to showcase its use as wella s a twister shell script.
 
 
-Further Project Information: 
+The project was initiated as part of an REU:
 
-	https://github.com/cloudmesh/reu/blob/master/doc/source/projects/bioinformatics.rst
+* https://github.com/cloudmesh/reu/blob/master/doc/source/projects/bioinformatics.rst
 
 Setting up submit.py within Cloudmesh environment
 ================================================
@@ -197,10 +198,10 @@ twisterScript
 ==================================================
 Regard twisterScript in doc directory
 
- - This script sets up the Twister and ActiveMQ environments as long as their classpaths are loaded on the machine this script is run on
- - set_nodes() sets the nodes appropriately for twister to run.
-	- See http://scsb.utmb.edu/facilities/random/protocols/pbs-mit-user-guide.htm for info on PBS_NODEFILE
- - set_amq() sets the headnode in the amq.properties file in the $TWISTER_HOME/bin/ directory
+- This script sets up the Twister and ActiveMQ environments as long as their classpaths are loaded on the machine this script is run on
+- set_nodes() sets the nodes appropriately for twister to run.
+  - See http://scsb.utmb.edu/facilities/random/protocols/pbs-mit-user-guide.htm for info on PBS_NODEFILE
+- set_amq() sets the headnode in the amq.properties file in the $TWISTER_HOME/bin/ directory
 
 After the nodes are set, the environment is started with lines 52 and 53
 
@@ -215,9 +216,6 @@ _________________________________________________
 **If only running specific executables, comment out others using '#' at the beginning of the line.**
 
 
-Progress
-==================================================
-Look at doc/journal.rst
 
 Future Work
 ==================================================
